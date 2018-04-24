@@ -6,15 +6,25 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { MapUserPage } from '../pages/map-user/map-user';
+import { MapUserPageModule } from '../pages/map-user/map-user.module';
+import { Geolocation } from '@ionic-native/geolocation';
+import { ServiceMotoProvider } from '../providers/service-moto/service-moto';
+import { HttpClientModule } from '@angular/common/http';
+import { PedirServicioPage } from '../pages/pedir-servicio/pedir-servicio';
+import { PedirServicioPageModule } from '../pages/pedir-servicio/pedir-servicio.module';
 
 @NgModule({
-  declarations: [
+  declarations: [ 
     MyApp,
-    HomePage
+    HomePage,
+    
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    MapUserPageModule,
+    HttpClientModule,
+    IonicModule.forRoot(MyApp) 
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -23,8 +33,10 @@ import { HomePage } from '../pages/home/home';
   ],
   providers: [
     StatusBar,
+    Geolocation,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    ServiceMotoProvider
   ]
 })
 export class AppModule {}
