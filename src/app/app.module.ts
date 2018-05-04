@@ -6,13 +6,21 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { MapUserPage } from '../pages/map-user/map-user';
+
 import { MapUserPageModule } from '../pages/map-user/map-user.module';
 import { Geolocation } from '@ionic-native/geolocation';
 import { ServiceMotoProvider } from '../providers/service-moto/service-moto';
 import { HttpClientModule } from '@angular/common/http';
-import { PedirServicioPage } from '../pages/pedir-servicio/pedir-servicio';
-import { PedirServicioPageModule } from '../pages/pedir-servicio/pedir-servicio.module';
+import { MapDriverPage } from '../pages/map-driver/map-driver';
+import { MapDriverPageModule } from '../pages/map-driver/map-driver.module';
+import { RegistroDriverPageModule } from '../pages/registro-driver/registro-driver.module';
+import { RegistroUserPageModule } from '../pages/registro-user/registro-user.module';
+import { MapUserPage } from '../pages/map-user/map-user';
+import { RegistroUserPage } from '../pages/registro-user/registro-user';
+import { RegistroDriverPage } from '../pages/registro-driver/registro-driver';
+
+
+
 
 @NgModule({
   declarations: [ 
@@ -23,13 +31,20 @@ import { PedirServicioPageModule } from '../pages/pedir-servicio/pedir-servicio.
   imports: [
     BrowserModule,
     MapUserPageModule,
+    MapDriverPageModule,
+    RegistroDriverPageModule,
+    RegistroUserPageModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp) 
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    HomePage,
+    MapDriverPage,
+    MapUserPage,
+    RegistroUserPage,
+    RegistroDriverPage
   ],
   providers: [
     StatusBar,

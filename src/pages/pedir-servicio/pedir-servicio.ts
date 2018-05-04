@@ -1,4 +1,4 @@
-import { Component, NgZone, ViewChild, ElementRef } from '@angular/core';
+import { Component, NgZone, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController, TextInput, Searchbar } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Observable } from 'rxjs/Observable';
@@ -134,7 +134,7 @@ export class PedirServicioPage {
     let precioApagar = Observable.create(observable => {
       this.geolocation.getCurrentPosition().then((position) => {
      
-        let latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+        
   
        var dato = this.getDistanceFromLatLonInKm(position.coords.latitude, position.coords.longitude,this.latitude,this.longitude);
         

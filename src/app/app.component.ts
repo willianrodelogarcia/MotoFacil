@@ -2,15 +2,18 @@ import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-
-import { HomePage } from '../pages/home/home';
 import { MapUserPage } from '../pages/map-user/map-user';
-import { PedirServicioPage } from '../pages/pedir-servicio/pedir-servicio';
+import { MapDriverPage } from '../pages/map-driver/map-driver';
+import { HomePage } from '../pages/home/home';
+
+
+
+
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = MapUserPage;  
+  rootPage:any = HomePage;  
  
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {
