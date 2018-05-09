@@ -7,12 +7,34 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>registroDriver</ion-title>
+    <ion-title>Registrarse</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+  <form [formGroup]="registroDriver" (ngSubmit)="registro()">
+      <ion-item>
+        <ion-label floating>Nombre Completo</ion-label>
+        <ion-input formControlName="nombre" type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Identificacion</ion-label>
+        <ion-input formControlName="identificacion" type="number"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Correo Electronico</ion-label>
+        <ion-input formControlName="correo" type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Celular</ion-label>
+        <ion-input formControlName="celular" type="number"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Placa del Vehiculo</ion-label>
+        <ion-input formControlName="placa" type="text"></ion-input>
+      </ion-item>
+      <button ion-button block type="submit" [disabled]="!registroDriver.valid">Registrar</button>
+  </form>
 </ion-content>

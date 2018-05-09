@@ -18,6 +18,20 @@ import { RegistroUserPageModule } from '../pages/registro-user/registro-user.mod
 import { MapUserPage } from '../pages/map-user/map-user';
 import { RegistroUserPage } from '../pages/registro-user/registro-user';
 import { RegistroDriverPage } from '../pages/registro-driver/registro-driver';
+import { UserPage } from '../pages/user/user';
+import { DriverPage } from '../pages/driver/driver';
+import { UserPageModule } from '../pages/user/user.module';
+import { DriverPageModule } from '../pages/driver/driver.module';
+import { LoginDriverPage } from '../pages/login-driver/login-driver';
+import { LoginUserPage } from '../pages/login-user/login-user';
+import { LoginDriverPageModule } from '../pages/login-driver/login-driver.module';
+import { LoginUserPageModule } from '../pages/login-user/login-user.module';
+import { VehiculoPageModule } from '../pages/vehiculo/vehiculo.module';
+import { VehiculoPage } from '../pages/vehiculo/vehiculo';
+import { ActivarServicioPage } from '../pages/activar-servicio/activar-servicio';
+import { ActivarServicioPageModule } from '../pages/activar-servicio/activar-servicio.module';
+import { InfoMotoPageModule } from '../pages/info-moto/info-moto.module';
+import { InfoMotoPage } from '../pages/info-moto/info-moto';
 
 
 
@@ -34,7 +48,14 @@ import { RegistroDriverPage } from '../pages/registro-driver/registro-driver';
     MapDriverPageModule,
     RegistroDriverPageModule,
     RegistroUserPageModule,
+    UserPageModule,
+    DriverPageModule,
+    LoginDriverPageModule,
+    LoginUserPageModule,
+    VehiculoPageModule,
+    ActivarServicioPageModule,
     HttpClientModule,
+    InfoMotoPageModule,
     IonicModule.forRoot(MyApp) 
   ],
   bootstrap: [IonicApp],
@@ -44,7 +65,14 @@ import { RegistroDriverPage } from '../pages/registro-driver/registro-driver';
     MapDriverPage,
     MapUserPage,
     RegistroUserPage,
-    RegistroDriverPage
+    RegistroDriverPage,
+    UserPage,
+    LoginDriverPage,
+    LoginUserPage,
+    DriverPage,
+    VehiculoPage,
+    ActivarServicioPage,
+    InfoMotoPage
   ],
   providers: [
     StatusBar,

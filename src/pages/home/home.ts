@@ -3,6 +3,8 @@ import { Component} from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MapUserPage } from '../map-user/map-user';
 import { MapDriverPage } from '../map-driver/map-driver';
+import { UserPage } from '../user/user';
+import { DriverPage } from '../driver/driver';
 
 
 @Component({
@@ -19,11 +21,11 @@ export class HomePage {
   }
 
   usuario(){
-    this.navCtrl.setRoot(MapUserPage);
+    this.navCtrl.setRoot(UserPage);
   }
 
   conductor(){
-    this.navCtrl.setRoot(MapDriverPage);
+    this.navCtrl.setRoot(DriverPage);
   }
 
 }

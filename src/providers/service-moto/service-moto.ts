@@ -19,7 +19,7 @@ export class ServiceMotoProvider {
 
   getConductores(){
     return new Promise((resolve)=>{
-      this.http.get("https://wrodelogarcia.000webhostapp.com/motofacil/serviceMoto.php?metodo=listarConductores").subscribe((data)=>{
+      this.http.get("http://localhost/serviceMoto/serviceMoto.php?metodo=listarConductores").subscribe((data)=>{
         resolve(data);
       },(err)=>{
         console.log(err);
@@ -36,7 +36,7 @@ export class ServiceMotoProvider {
     let options = new HttpParams();
     return new Promise((post)=>{
       let params = "&origen=" + "origen" + "&destino=" + "destino" + "&precio=" + "precio" + "&correoU=" + "wrodelo@gmail.com" + "&estado=" + "pedir";
-      this.http.post("https://wrodelogarcia.000webhostapp.com/motofacil/serviceMoto.php?metodo=solicitarServicio", params, httpOptions).subscribe((data)=>{
+      this.http.post("http://localhost/serviceMoto/serviceMoto.php?metodo=solicitarServicio", params, httpOptions).subscribe((data)=>{
         post(data);
       },(err)=>{
         console.log(err);
@@ -55,7 +55,7 @@ export class ServiceMotoProvider {
     let options = new HttpParams();
     return new Promise((post)=>{
       let params = "&correoU=" + "wrodelo@gmail.com" + "&estado=" + "aceptar" + "&identificacionC="+ "1143389715";
-      this.http.post("https://wrodelogarcia.000webhostapp.com/motofacil/serviceMoto.php?metodo=aceptarServicio", params, httpOptions).subscribe((data)=>{
+      this.http.post("http://localhost/serviceMoto/serviceMoto.php?metodo=aceptarServicio", params, httpOptions).subscribe((data)=>{
         post(data);
       },(err)=>{
         console.log(err);
@@ -65,8 +65,64 @@ export class ServiceMotoProvider {
 
   getServicios(){
     return new Promise((resolve)=>{
-      this.http.get("https://wrodelogarcia.000webhostapp.com/motofacil/serviceMoto.php?metodo=servicios").subscribe((data)=>{
+      this.http.get("http://localhost/serviceMoto/serviceMoto.php?metodo=servicios").subscribe((data)=>{
         resolve(data);
+      },(err)=>{
+        console.log(err);
+      });
+    });
+  }
+
+
+  registroDriver(nombre,identificacion,correo,celular,placa){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/x-www-form-urlencoded'
+      })
+    };
+
+    let options = new HttpParams(); 
+    return new Promise((post)=>{
+      let params = "&nombre=" + nombre + "&identificacion=" + identificacion + "&correo="+ correo + "&celular="+ celular + "&placa="+ placa;
+      this.http.post("http://localhost/serviceMoto/serviceMoto.php?metodo=registroDriver", params, httpOptions).subscribe((data)=>{
+        post(data);
+      },(err)=>{
+        console.log(err);
+      });
+    });
+  }
+
+
+  loginDriver(correo,password){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/x-www-form-urlencoded'
+      })
+    };
+
+    let options = new HttpParams(); 
+    return new Promise((post)=>{
+      let params = "&correo=" + correo + "&password=" + password;
+      this.http.post("http://localhost/serviceMoto/serviceMoto.php?metodo=login", params, httpOptions).subscribe((data)=>{
+        post(data);
+      },(err)=>{
+        console.log(err);
+      });
+    });
+  }
+
+  getMotos(){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/x-www-form-urlencoded'
+      })
+    };
+
+    let options = new HttpParams(); 
+    return new Promise((post)=>{
+      let params = "&placa=" + "xsdr" ;
+      this.http.post("http://localhost/serviceMoto/serviceMoto.php?metodo=motos", params, httpOptions).subscribe((data)=>{
+        post(data);
       },(err)=>{
         console.log(err);
       });

@@ -5,6 +5,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { MapUserPage } from '../pages/map-user/map-user';
 import { MapDriverPage } from '../pages/map-driver/map-driver';
 import { HomePage } from '../pages/home/home';
+import { DriverPage } from '../pages/driver/driver';
+import { VehiculoPage } from '../pages/vehiculo/vehiculo';
+import { InfoMotoPage } from '../pages/info-moto/info-moto';
 
 
 
@@ -13,7 +16,7 @@ import { HomePage } from '../pages/home/home';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = HomePage;  
+  rootPage:any = InfoMotoPage;  
  
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {
