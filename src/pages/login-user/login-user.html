@@ -14,5 +14,16 @@
 
 
 <ion-content padding>
-
+  <form [formGroup]="loginUser" (ngSubmit)="login()">
+    <ion-item>
+      <ion-label floating>Correo</ion-label>
+      <ion-input formControlName="correo" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Contraseña</ion-label>
+      <ion-input formControlName="contraseña" type="text"></ion-input>
+    </ion-item>
+    
+    <button ion-button block type="submit" [disabled]="!loginUser.valid">Ingresar</button>
+  </form>
 </ion-content>

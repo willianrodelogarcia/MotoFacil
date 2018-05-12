@@ -32,6 +32,8 @@ import { ActivarServicioPage } from '../pages/activar-servicio/activar-servicio'
 import { ActivarServicioPageModule } from '../pages/activar-servicio/activar-servicio.module';
 import { InfoMotoPageModule } from '../pages/info-moto/info-moto.module';
 import { InfoMotoPage } from '../pages/info-moto/info-moto';
+import { IonicStorageModule } from '@ionic/storage';
+
 
 
 
@@ -55,8 +57,9 @@ import { InfoMotoPage } from '../pages/info-moto/info-moto';
     VehiculoPageModule,
     ActivarServicioPageModule,
     HttpClientModule,
-    InfoMotoPageModule,
-    IonicModule.forRoot(MyApp) 
+    InfoMotoPageModule, 
+    IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -72,13 +75,15 @@ import { InfoMotoPage } from '../pages/info-moto/info-moto';
     DriverPage,
     VehiculoPage,
     ActivarServicioPage,
-    InfoMotoPage
+    InfoMotoPage 
   ],
   providers: [
     StatusBar,
     Geolocation,
     SplashScreen,
+    Storage,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+    
     ServiceMotoProvider
   ]
 })

@@ -9,22 +9,26 @@ import { DriverPage } from '../pages/driver/driver';
 import { VehiculoPage } from '../pages/vehiculo/vehiculo';
 import { InfoMotoPage } from '../pages/info-moto/info-moto';
 
-
+import { Storage } from '@ionic/storage';
+import { ServiceMotoProvider } from '../providers/service-moto/service-moto';
 
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = InfoMotoPage;  
- 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
+  rootPage: any = HomePage;
+
+  constructor(public serviceMoto: ServiceMotoProvider,private storage: Storage, platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
+
     });
+
   }
+
 }
 

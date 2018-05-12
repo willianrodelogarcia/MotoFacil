@@ -22,13 +22,19 @@ export class MapDriverPage {
   directionsService = new google.maps.DirectionsService;
   directionsDisplay = new google.maps.DirectionsRenderer;
   esconderCard = true;
+
+  origen:string;
+  destino:string;
+  precio:string;
+  correoU:string;
+
   constructor(public serviceMoto: ServiceMotoProvider,private geolocation: Geolocation, public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad MapDriverPage');
     this.loadMap();
-    //this.getServicios()
+    //this.getServicios();
   }
 
   disponibilidad(evt){
@@ -97,6 +103,11 @@ export class MapDriverPage {
           this.loader.dismiss()
 
           this.correoU = this.servicios["data"][0].correoU;*/
+
+          this.correoU = serv["data"][0].correoU;
+          this.origen = serv["data"][0].origen;
+          this.destino = serv["data"][0].destino;
+          this.precio = serv["data"][0].precio;
 
         } else {
           console.log("esperando...")

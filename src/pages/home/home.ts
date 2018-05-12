@@ -5,6 +5,7 @@ import { MapUserPage } from '../map-user/map-user';
 import { MapDriverPage } from '../map-driver/map-driver';
 import { UserPage } from '../user/user';
 import { DriverPage } from '../driver/driver';
+import { ServiceMotoProvider } from '../../providers/service-moto/service-moto';
 
 
 @Component({
@@ -13,7 +14,7 @@ import { DriverPage } from '../driver/driver';
   
 })
 export class HomePage {
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public serviceMoto: ServiceMotoProvider,public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
@@ -21,7 +22,14 @@ export class HomePage {
   }
 
   usuario(){
-    this.navCtrl.setRoot(UserPage);
+    this.serviceMoto.getEmail().then((email)=>{
+      if(email){
+        console.log(email)
+      }else{
+        this.navCtrl.setRoot(UserPage);
+      }
+    });
+    
   }
 
   conductor(){

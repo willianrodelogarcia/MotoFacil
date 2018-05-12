@@ -1,5 +1,6 @@
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Storage } from '@ionic/storage';
 
 /*
   Generated class for the ServiceMotoProvider provider.
@@ -10,7 +11,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class ServiceMotoProvider {
  
-  constructor(public http: HttpClient) {
+  constructor(private storage: Storage,public http: HttpClient) {
     console.log('Hello ServiceMotoProvider Provider');
   }
 
@@ -26,7 +27,7 @@ export class ServiceMotoProvider {
       });
     });
   }
-  pedirServicio() {
+  pedirServicio(origen, destino, precio, correo) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/x-www-form-urlencoded'
@@ -35,7 +36,7 @@ export class ServiceMotoProvider {
 
     let options = new HttpParams();
     return new Promise((post)=>{
-      let params = "&origen=" + "origen" + "&destino=" + "destino" + "&precio=" + "precio" + "&correoU=" + "wrodelo@gmail.com" + "&estado=" + "pedir";
+      let params = "&origen=" + origen + "&destino=" + destino + "&precio=" + precio + "&correoU=" + correo + "&estado=" + "pedir";
       this.http.post("http://localhost/serviceMoto/serviceMoto.php?metodo=solicitarServicio", params, httpOptions).subscribe((data)=>{
         post(data);
       },(err)=>{
@@ -91,6 +92,23 @@ export class ServiceMotoProvider {
       });
     });
   }
+  registroUser(nombre,correo,celular){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/x-www-form-urlencoded'
+      })
+    };
+
+    let options = new HttpParams(); 
+    return new Promise((post)=>{
+      let params = "&nombre=" + nombre + "&correo="+ correo + "&celular="+ celular;
+      this.http.post("http://localhost/serviceMoto/serviceMoto.php?metodo=registroUser", params, httpOptions).subscribe((data)=>{
+        post(data);
+      },(err)=>{
+        console.log(err);
+      });
+    });
+  }
 
 
   loginDriver(correo,password){
@@ -104,6 +122,24 @@ export class ServiceMotoProvider {
     return new Promise((post)=>{
       let params = "&correo=" + correo + "&password=" + password;
       this.http.post("http://localhost/serviceMoto/serviceMoto.php?metodo=login", params, httpOptions).subscribe((data)=>{
+        post(data);
+      },(err)=>{
+        console.log(err);
+      });
+    });
+  }
+
+  loginUser(correo,password){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/x-www-form-urlencoded'
+      })
+    };
+
+    let options = new HttpParams(); 
+    return new Promise((post)=>{
+      let params = "&correo=" + correo + "&password=" + password;
+      this.http.post("http://localhost/serviceMoto/serviceMoto.php?metodo=loginUser", params, httpOptions).subscribe((data)=>{
         post(data);
       },(err)=>{
         console.log(err);
@@ -126,6 +162,20 @@ export class ServiceMotoProvider {
       },(err)=>{
         console.log(err);
       });
+    });
+  }
+
+  setEmail(email) {
+    this.storage.set('email', email);
+  }
+
+  getEmail() {
+    return this.storage.get('email');
+  }
+
+  removeEmail() {
+    this.storage.remove('email').then(() => {
+      console.log('email is removed');
     });
   }
 

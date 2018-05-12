@@ -35,7 +35,7 @@ export class MapUserPage {
   esconderCard2: boolean = true;
   esconderSearch: boolean = false;
   autocomplete = { input: '' };
-
+  correo:string = "wrodelo@gmail.com";
   GoogleAutocomplete = new google.maps.places.AutocompleteService();
   autocompleteItems = [];
 
@@ -266,7 +266,7 @@ export class MapUserPage {
     this.loader = this.loadingCtrl.create({
       content: "Buscando..."
     });
-    this.serviceMoto.pedirServicio().then((data) => {
+    this.serviceMoto.pedirServicio(this.origen,this.destino,this.precio,this.correo).then((data) => {
       console.log(data["data"][0])
       if (data["data"][0] == "peticion_OK") {
         this.loader.present();

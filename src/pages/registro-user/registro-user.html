@@ -14,5 +14,30 @@
 
 
 <ion-content padding>
+  <form [formGroup]="registroUser" (ngSubmit)="registro()">
+    <ion-item>
+      <ion-label floating>Nombre Completo</ion-label>
+      <ion-input formControlName="nombre" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Correo</ion-label>
+      <ion-input formControlName="correo" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Celular</ion-label>
+      <ion-input formControlName="celular" type="number"></ion-input>
+    </ion-item>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <button type="button" (click)="tomarFoto()" ion-button>Tomar Foto</button>
+        </ion-col>
+        <ion-col>
+          <img src="https://png.icons8.com/color/1600/person-male.png" />
+        </ion-col>
+      </ion-row>
+    </ion-grid>
 
+    <button ion-button block type="submit" [disabled]="!registroUser.valid">Registrar</button>
+  </form>
 </ion-content>
