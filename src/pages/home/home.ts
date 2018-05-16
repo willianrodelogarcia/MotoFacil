@@ -6,6 +6,7 @@ import { MapDriverPage } from '../map-driver/map-driver';
 import { UserPage } from '../user/user';
 import { DriverPage } from '../driver/driver';
 import { ServiceMotoProvider } from '../../providers/service-moto/service-moto';
+import { ActivarServicioPage } from '../activar-servicio/activar-servicio';
 
 
 @Component({
@@ -25,6 +26,7 @@ export class HomePage {
     this.serviceMoto.getEmail().then((email)=>{
       if(email){
         console.log(email)
+        this.navCtrl.setRoot(MapUserPage);
       }else{
         this.navCtrl.setRoot(UserPage);
       }
@@ -33,7 +35,15 @@ export class HomePage {
   }
 
   conductor(){
-    this.navCtrl.setRoot(DriverPage);
+    
+    this.serviceMoto.getEmail().then((email)=>{
+      if(email){
+        console.log(email)
+        this.navCtrl.setRoot(ActivarServicioPage); 
+      }else{
+        this.navCtrl.setRoot(DriverPage);
+      }
+    });
   }
 
 }

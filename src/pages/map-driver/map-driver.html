@@ -8,7 +8,7 @@
 
   <ion-item>
 
-    <ion-toggle (ionChange)="disponibilidad($event)"></ion-toggle>
+    <ion-toggle [(ngModel)]="estadoC" (ionChange)="disponibilidad($event)"></ion-toggle>
   </ion-item>
   <div #map id="map"></div>
 
@@ -32,7 +32,7 @@
 
       </ion-col>
     </ion-row>
-    <ion-row [hidden]="true">
+    <ion-row [hidden]="esconderBotton1">
       <ion-col>
         <button (click)="contacto()" ion-button block small>Contacto</button>
       </ion-col>
@@ -40,25 +40,25 @@
         <button (click)="cancelarServicio()" ion-button block small>Cancelar Servicio</button>
       </ion-col>
     </ion-row>
-    <ion-row [hidden]="true">
+    <ion-row [hidden]="esconderBotton2">
       <ion-col>
-        <button (click)="contacto()" ion-button block small>Ganancias</button>
+        <button (click)="ganancias()" ion-button block small>Ganancias</button>
       </ion-col>
       <ion-col>
-        <button (click)="cancelarServicio()" ion-button block small>Calificacion</button>
-      </ion-col>
-    </ion-row>
-    <ion-row [hidden]="true">
-      <ion-col>
-        <button (click)="contacto()" ion-button block small>Iniciar Viaje</button>
-      </ion-col>
-      <ion-col>
-        <button (click)="cancelarServicio()" ion-button block small>Estoy aqui...</button>
+        <button (click)="calificacion()" ion-button block small>Calificacion</button>
       </ion-col>
     </ion-row>
-    <ion-row [hidden]="false">
+    <ion-row [hidden]="esconderBotton3">
       <ion-col>
-        <button (click)="contacto()" ion-button block small>Terminar Viaje</button>
+        <button (click)="iniciarViaje()" ion-button block small>Iniciar Viaje</button>
+      </ion-col>
+      <ion-col>
+        <button  ion-button block small>Estoy aqui...</button>
+      </ion-col>
+    </ion-row>
+    <ion-row [hidden]="esconderBotton4">
+      <ion-col>
+        <button (click)="terminarViaje()" ion-button block small>Terminar Viaje</button>
       </ion-col>
     </ion-row>
   </div>

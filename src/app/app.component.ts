@@ -11,13 +11,14 @@ import { InfoMotoPage } from '../pages/info-moto/info-moto';
 
 import { Storage } from '@ionic/storage';
 import { ServiceMotoProvider } from '../providers/service-moto/service-moto';
+import { ActivarServicioPage } from '../pages/activar-servicio/activar-servicio';
 
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage: any = HomePage;
+  rootPage: any = HomePage; 
 
   constructor(public serviceMoto: ServiceMotoProvider,private storage: Storage, platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {

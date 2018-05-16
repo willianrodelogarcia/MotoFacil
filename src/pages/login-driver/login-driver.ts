@@ -36,6 +36,7 @@ export class LoginDriverPage {
       if(data["data"][0] != null){
         if(data["data"][0].estadoCorreo == 1){
           console.log("Correo Activado")
+          this.serviceMoto.setEmail(this.loginDriver.value.correo);
           this.navCtrl.setRoot(VehiculoPage);
         }else{
           console.log("Correo no Activado")

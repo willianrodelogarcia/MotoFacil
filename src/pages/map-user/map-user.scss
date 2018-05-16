@@ -8,6 +8,7 @@ page-map-user {
         }
     }
     ion-searchbar {
+        
         position: absolute;
         opacity: .7;
         z-index: 3;
@@ -17,7 +18,17 @@ page-map-user {
         position: absolute;
         bottom: 0;
         width: 100%;
+        
     }
+
+    .outLog{
+        position: absolute;
+        opacity: .7; 
+        z-index: 3;
+        
+        margin-top: 13%;
+        margin-left: 85%
+     }
 
     .request{
         

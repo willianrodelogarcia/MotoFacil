@@ -7,42 +7,59 @@
 
 
 
-<ion-content >
+<ion-content>
+    <div class="outLog">
+        <button ion-button icon-only outline (click)="salir()">
+            <ion-icon name="md-power"></ion-icon>
+          </button>
+    </div>
+    
   <ion-searchbar [hidden]="esconderSearch" (click)="pedirServicio()" placeholder="Pa' donde vas?"></ion-searchbar>
   <!--<div class="map-wrapper">
       <map #map></map>
   </div>-->
-
-  <div #map id="map"></div> 
   
 
-  <div class="botton request">
+  <div #map id="map"></div>
 
+
+  <div class="botton request">
+    
     <ion-row>
-      
+
       <ion-col>
-          <ion-card [hidden]="esconderCard">
-              
-              <ion-card-content>
-                <p>Origen: {{origen}}</p>
-                <p>Destino: {{destino}}</p>
-                <p>Precio: {{precio}}</p>
-                <button (click)="solicitarServicio()" ion-button block clear small>Solicitar Servicio</button>
-              </ion-card-content>
-          </ion-card>
-        <!--[hidden]="true"-->
-          <button [hidden]="esconderBoton" ion-button block >Registrar Contacto</button>
-          <ion-card [hidden]="esconderCard2">
-              
-            <ion-card-content>
-              <p>Correo Usuario: {{correoU}}</p>
-              <p>Origen: {{origen}}</p>
-              <p>Destino: {{destino}}</p>
-              <p>Precio: {{precio}}</p>
-              <button  ion-button block clear small>Solicitar Servicio</button>
-            </ion-card-content>
+        <ion-card [hidden]="esconderCard">
+
+          <ion-card-content>
+            <p>Origen: {{origen}}</p>
+            <p>Destino: {{destino}}</p>
+            <p>Precio: {{precio}}</p>
+            <button (click)="solicitarServicio()" ion-button block clear small>Solicitar Servicio</button>
+          </ion-card-content>
         </ion-card>
-      
+        <!--[hidden]="true"-->
+        <button [hidden]="esconderBoton" ion-button block>Registrar Contacto</button>
+        <ion-card [hidden]="esconderCard2">
+
+          <ion-card-content>
+            <p>Origen: {{origen}}</p>
+            <p>Destino: {{destino}}</p>
+            <p>Precio: {{precio}}</p>
+            <img style="width: 100px; height: 10px;" src="{{imageConductor}}" />
+            <button ion-button block clear small>Cancelar Servicio</button>
+          </ion-card-content>
+        </ion-card>
+
+        <ion-card [hidden]="esconderCard3">
+
+          <ion-card-content>
+            <p>Origen:</p>
+            <p>Destino:</p>
+            <p>Precio: </p>
+            <button ion-button block clear small>Terminar Calificar</button>
+          </ion-card-content>
+        </ion-card>
+
       </ion-col>
     </ion-row>
   </div>

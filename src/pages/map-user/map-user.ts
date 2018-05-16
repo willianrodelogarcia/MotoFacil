@@ -4,6 +4,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { Observable } from 'rxjs/Observable';
 import { ServiceMotoProvider } from '../../providers/service-moto/service-moto';
 import { PedirServicioPage } from '../pedir-servicio/pedir-servicio';
+import { HomePage } from '../home/home';
 
 /**
  * Generated class for the MapUserPage page.
@@ -20,6 +21,7 @@ declare var google;
   templateUrl: 'map-user.html',
 })
 export class MapUserPage {
+  imageConductor: any;
   longitude: any;
   latitude: any;
   @ViewChild('map') mapElement: ElementRef;
@@ -33,9 +35,10 @@ export class MapUserPage {
   esconderBoton: boolean = false;
   esconderCard: boolean = true;
   esconderCard2: boolean = true;
+  esconderCard3: boolean = true;
   esconderSearch: boolean = false;
   autocomplete = { input: '' };
-  correo:string = "wrodelo@gmail.com";
+  correo: string;
   GoogleAutocomplete = new google.maps.places.AutocompleteService();
   autocompleteItems = [];
 
@@ -45,6 +48,10 @@ export class MapUserPage {
   loader: any;
   constructor(public loadingCtrl: LoadingController, public serviceMoto: ServiceMotoProvider, public navCtrl: NavController,
     public navParams: NavParams, private geolocation: Geolocation, private modalCtrl: ModalController) {
+
+    this.serviceMoto.getEmail().then((email) => {
+      this.correo = email;
+    });
 
   }
 
@@ -82,7 +89,7 @@ export class MapUserPage {
     }
     this.getConductores();
 
-    
+
 
   }
 
@@ -136,7 +143,7 @@ export class MapUserPage {
       this.directionsDisplay.setOptions({ suppressMarkers: true });
       if (!this.esconderCard) {
         this.calculateAndDisplayRoute(position);
-        
+
       }
 
 
@@ -162,7 +169,7 @@ export class MapUserPage {
       //let content = "<h4>AQUI!</h4>";         
 
       //this.addInfoWindow(marker, content);
-      
+
     }, (err) => {
       console.log(err);
     });
@@ -260,38 +267,60 @@ export class MapUserPage {
     });
   }
 
-  correoU:string;
+  correoU: string;
   solicitarServicio() {
     this.servicios = [];
     this.loader = this.loadingCtrl.create({
       content: "Buscando..."
     });
-    this.serviceMoto.pedirServicio(this.origen,this.destino,this.precio,this.correo).then((data) => {
+    this.serviceMoto.pedirServicio(this.origen, this.destino, this.precio, this.correo).then((data) => {
       console.log(data["data"][0])
       if (data["data"][0] == "peticion_OK") {
         this.loader.present();
         this.esconderCard = true;
         setInterval(() => {
-          this.serviceMoto.getServicios().then((serv) => {
+          this.serviceMoto.getServicioU(this.correo).then((serv) => {
             console.log(serv["data"][0].estado)
             if (serv["data"][0].estado == "aceptar") {
               this.servicios = serv;
               this.esconderCard2 = false;
-              this.loader.dismiss()
-              
-             this.correoU = this.servicios["data"][0].correoU;
+              this.loader.dismiss();
+
+              this.origen = this.servicios["data"][0].origen;
+              this.destino = this.servicios["data"][0].destino;
+              this.precio = this.servicios["data"][0].precio;
+              console.log("ID "+this.servicios["data"][0].identificacionC);
+              this.serviceMoto.getConductoresId(this.servicios["data"][0].identificacionC).then((condu) => {
+               
+                this.serviceMoto.getMotos(condu["data"][0].correo).then((data)=>{
+                  console.log(data["data"])
+
+                  this.imageConductor = data["data"][0].fotoConductor;
+                });
+                
+              });
 
             } else {
               console.log("esperando...")
+              //this.navCtrl.setRoot(MapUserPage);
+            }
+
+            if (serv["data"][0].estado == "terminar") {
+              this.esconderCard2 = true;
+              this.esconderCard3 = false;
             }
           });
         }, 1000);
       }
-      
+
     });
 
+  }
 
 
+  salir() {
+    this.serviceMoto.removeEmail();
+    this.navCtrl.setRoot(HomePage);
   }
 
 }

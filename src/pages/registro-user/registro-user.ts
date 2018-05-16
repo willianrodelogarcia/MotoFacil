@@ -34,6 +34,7 @@ export class RegistroUserPage {
   registro(){
     this.serviceMoto.registroUser(this.registroUser.value.nombre,this.registroUser.value.correo,this.registroUser.value.celular).then((data)=>{
       console.log(data)
+      //this.navCtrl.setRoot();
     });
     //this.registroUser.value.nombre,this.registroUser.value.correo,this.registroUser.value.celular
   }

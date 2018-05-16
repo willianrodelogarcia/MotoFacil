@@ -25,6 +25,7 @@ export class DriverPage {
   }
 
   ingresar(){
+    
     this.navCtrl.push(LoginDriverPage);
   }
 
