@@ -12,6 +12,7 @@ import { InfoMotoPage } from '../pages/info-moto/info-moto';
 import { Storage } from '@ionic/storage';
 import { ServiceMotoProvider } from '../providers/service-moto/service-moto';
 import { ActivarServicioPage } from '../pages/activar-servicio/activar-servicio';
+import { CancelarServicioDriverPage } from '../pages/cancelar-servicio-driver/cancelar-servicio-driver';
 
 
 @Component({

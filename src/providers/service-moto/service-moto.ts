@@ -11,6 +11,7 @@ import { Storage } from '@ionic/storage';
 @Injectable()
 export class ServiceMotoProvider {
  
+  
   constructor(private storage: Storage,public http: HttpClient) {
     console.log('Hello ServiceMotoProvider Provider');
   }
@@ -111,7 +112,58 @@ export class ServiceMotoProvider {
       });
     });
   }
+  
+  getCancelaU(correo){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/x-www-form-urlencoded'
+      })
+    };
 
+    let options = new HttpParams(); 
+    return new Promise((post)=>{
+      let params = "&correoU=" + correo;
+      this.http.post("http://localhost/serviceMoto/serviceMoto.php?metodo=cancelaU", params, httpOptions).subscribe((data)=>{
+        post(data);
+      },(err)=>{
+        console.log(err);
+      });
+    });
+  }
+  getCancelaC(correo){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/x-www-form-urlencoded'
+      })
+    };
+
+    let options = new HttpParams(); 
+    return new Promise((post)=>{
+      let params = "&correoC=" + correo;
+      this.http.post("http://localhost/serviceMoto/serviceMoto.php?metodo=cancelaC", params, httpOptions).subscribe((data)=>{
+        post(data);
+      },(err)=>{
+        console.log(err);
+      });
+    });
+  }
+  cancelaC(correo,r){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/x-www-form-urlencoded'
+      })
+    };
+
+    let options = new HttpParams(); 
+    return new Promise((post)=>{
+      let params = "&correoC=" + correo +"&razon="+r;
+      this.http.post("http://localhost/serviceMoto/serviceMoto.php?metodo=cancelaCond", params, httpOptions).subscribe((data)=>{
+        post(data);
+      },(err)=>{
+        console.log(err);
+      });
+    });
+  }
 
   registroDriver(nombre,identificacion,correo,celular,placa){
     const httpOptions = {

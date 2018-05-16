@@ -2,6 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 import { ServiceMotoProvider } from '../../providers/service-moto/service-moto';
+import { CancelarServicioDriverPage } from '../cancelar-servicio-driver/cancelar-servicio-driver';
 
 /**
  * Generated class for the MapDriverPage page.
@@ -16,6 +17,8 @@ declare var google;
   templateUrl: 'map-driver.html',
 })
 export class MapDriverPage {
+  razon: any;
+  esconderCard1: boolean = true;
   esconderBotton1: boolean = true;
   esconderBotton2: boolean = false;
   esconderBotton3: boolean = true;
@@ -84,11 +87,13 @@ export class MapDriverPage {
     this.geolocation.getCurrentPosition().then((position)=>{
 
       if(this.esconderCard){
-        if((position.coords.latitude && this.latitudeOrigen) && (position.coords.longitude && this.longitudeOrigen)){
+        
+        if((position.coords.latitude === this.latitudeOrigen) && (position.coords.longitude === this.longitudeOrigen)){
           console.log("Estoy donde esta el Usuario")
           this.esconderBotton3 = false;
           this.esconderBotton1 = true;
           this.esconderBotton2 = true;
+          this.esconderBotton4 = true;
         }else{
           console.log("Voy en camino")
         }
@@ -97,11 +102,13 @@ export class MapDriverPage {
       }
 
 
-      if((position.coords.latitude && this.latitudeDestino) && (position.coords.longitude && this.longitudeDestino)){
+      if((position.coords.latitude === this.latitudeDestino) && (position.coords.longitude === this.longitudeDestino)){
+        
         this.esconderBotton1 = true;
         this.esconderBotton2 = true;
         this.esconderBotton3 = true;
         this.esconderBotton4 = false;
+        console.log("Llegamos al destino")
       }
      
 
@@ -211,6 +218,7 @@ export class MapDriverPage {
         if (serv["data"][0].estado == "pedir") {
           this.esconderCard = false;
           this.esconderBotton2 = true;
+          this.esconderCard1 = true;
           /*this.servicios = serv;
           
           this.loader.dismiss()
@@ -226,6 +234,18 @@ export class MapDriverPage {
 
         } else {
           console.log("esperando...")
+        }
+
+        if(serv["data"][0].estado == "cancelarU"){
+          this.esconderCard1 = false;
+          this.esconderCard = true;
+          this.esconderBotton1 = true;
+          this.esconderBotton2 = true;
+          this.esconderBotton3 = true;
+          this.esconderBotton4 = true;
+          this.serviceMoto.getCancelaU(this.correoU).then((cancela)=>{
+            this.razon = cancela["data"][0].razonU;
+          });
         }
       });
     }, 1000);
@@ -248,9 +268,11 @@ export class MapDriverPage {
   }
 
   cancelarServicio(){
-    this.serviceMoto.cancelarServicio(this.correoU).then((peticion)=>{
+    /*this.serviceMoto.cancelarServicio(this.correoU).then((peticion)=>{
       console.log(peticion)
-    });
+    });*/
+
+    this.navCtrl.push(CancelarServicioDriverPage,{correoU:this.correoC});
   }
 
   obtenerDireccionOrigenLatLng(address: any) {

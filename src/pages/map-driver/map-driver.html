@@ -32,7 +32,7 @@
 
       </ion-col>
     </ion-row>
-    <ion-row [hidden]="esconderBotton1">
+    <ion-row [hidden]="false">
       <ion-col>
         <button (click)="contacto()" ion-button block small>Contacto</button>
       </ion-col>
@@ -61,5 +61,14 @@
         <button (click)="terminarViaje()" ion-button block small>Terminar Viaje</button>
       </ion-col>
     </ion-row>
+
+    <ion-card [hidden]="esconderCard1">
+      <ion-card-content>
+        <p>Razon de la Cancelacion</p>
+        <p>Razon: {{razon}}</p>
+        
+        <button ion-button block clear small>Cancelar Servicio</button>
+      </ion-card-content>
+    </ion-card>
   </div>
 </ion-content>

@@ -33,6 +33,8 @@ import { ActivarServicioPageModule } from '../pages/activar-servicio/activar-ser
 import { InfoMotoPageModule } from '../pages/info-moto/info-moto.module';
 import { InfoMotoPage } from '../pages/info-moto/info-moto';
 import { IonicStorageModule } from '@ionic/storage';
+import { CancelarServicioDriverPageModule } from '../pages/cancelar-servicio-driver/cancelar-servicio-driver.module';
+import { CancelarServicioDriverPage } from '../pages/cancelar-servicio-driver/cancelar-servicio-driver';
 
 
 
@@ -57,7 +59,8 @@ import { IonicStorageModule } from '@ionic/storage';
     VehiculoPageModule,
     ActivarServicioPageModule,
     HttpClientModule,
-    InfoMotoPageModule, 
+    InfoMotoPageModule,
+    CancelarServicioDriverPageModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot()
   ],
@@ -75,6 +78,7 @@ import { IonicStorageModule } from '@ionic/storage';
     DriverPage,
     VehiculoPage,
     ActivarServicioPage,
+    CancelarServicioDriverPage,
     InfoMotoPage 
   ],
   providers: [

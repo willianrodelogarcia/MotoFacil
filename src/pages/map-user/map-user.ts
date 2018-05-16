@@ -21,13 +21,16 @@ declare var google;
   templateUrl: 'map-user.html',
 })
 export class MapUserPage {
+  correoC: any;
+  razon: any;
+  nombreCond: any;
   imageConductor: any;
   longitude: any;
   latitude: any;
   @ViewChild('map') mapElement: ElementRef;
   map: any;
   latlng: any;
-  conductores: any;
+  conductores: any = [];
   servicios: any;
   origen: string;
   destino: string;
@@ -36,6 +39,7 @@ export class MapUserPage {
   esconderCard: boolean = true;
   esconderCard2: boolean = true;
   esconderCard3: boolean = true;
+  esconderCard4: boolean = true;
   esconderSearch: boolean = false;
   autocomplete = { input: '' };
   correo: string;
@@ -52,6 +56,7 @@ export class MapUserPage {
     this.serviceMoto.getEmail().then((email) => {
       this.correo = email;
     });
+
 
   }
 
@@ -87,24 +92,35 @@ export class MapUserPage {
       this.esconderSearch = true;
       console.log("no esta vacio")
     }
-    this.getConductores();
-
-
+    /*setInterval(() => {
+      this.getConductores();
+    }, 1000);*/
+    this.loadMap();
 
   }
 
   getConductores() {
-    setInterval(() => {
-      this.serviceMoto.getConductores().then((con) => {
-        this.conductores = con;
-        //console.log(this.conductores);
 
-      }, (err) => {
-        this.loadMap();
-        console.log("err")
-      });
-    }, 1000);
-    this.loadMap();
+    this.serviceMoto.getConductores().then((con) => {
+      
+      if(con["data"][0].estadoC === "1"){
+        this.conductores = con;
+        this.conductores.data.forEach(element => {
+
+          this.addMarker(element);
+
+         });
+      }
+      
+
+      //console.log(this.conductores);
+
+    }, (err) => {
+      this.loadMap();
+      console.log("err")
+    });
+
+
 
   }
 
@@ -124,8 +140,12 @@ export class MapUserPage {
   loadMap() {
 
     /*setInterval(()=>{
-        
+
     },1000);*/
+
+    setInterval(() => {
+      this.getConductores();
+    }, 1000);
     this.geolocation.getCurrentPosition().then((position) => {
 
       let latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
@@ -158,15 +178,15 @@ export class MapUserPage {
 
       //this.addMarker(marker);
       if (this.conductores !== []) {
-        setInterval(() => {
+        /*setInterval(() => {
           this.conductores.data.forEach(element => {
 
-            this.addMarker(element);
+           this.addMarker(element);
 
           });
-        }, 1000);
+        }, 1000);*/
       }
-      //let content = "<h4>AQUI!</h4>";         
+      //let content = "<h4>AQUI!</h4>";
 
       //this.addInfoWindow(marker, content);
 
@@ -201,15 +221,15 @@ export class MapUserPage {
     this.addMarkerP(markerD);
   }
   /*addInfoWindow(marker, content){
- 
+
     let infoWindow = new google.maps.InfoWindow({
       content: content
     });
-   
+
     google.maps.event.addListener(marker, 'click', () => {
       infoWindow.open(this.map, marker);
     });
-   
+
   }*/
 
   addMarker(marker) {
@@ -289,15 +309,16 @@ export class MapUserPage {
               this.origen = this.servicios["data"][0].origen;
               this.destino = this.servicios["data"][0].destino;
               this.precio = this.servicios["data"][0].precio;
-              console.log("ID "+this.servicios["data"][0].identificacionC);
+              console.log("ID " + this.servicios["data"][0].identificacionC);
               this.serviceMoto.getConductoresId(this.servicios["data"][0].identificacionC).then((condu) => {
-               
-                this.serviceMoto.getMotos(condu["data"][0].correo).then((data)=>{
+                this.nombreCond = condu["data"][0].nombre;
+                this.correoC = condu["data"][0].correo;
+                this.serviceMoto.getMotos(condu["data"][0].correo).then((data) => {
                   console.log(data["data"])
 
                   this.imageConductor = data["data"][0].fotoConductor;
                 });
-                
+
               });
 
             } else {
@@ -309,6 +330,13 @@ export class MapUserPage {
               this.esconderCard2 = true;
               this.esconderCard3 = false;
             }
+
+            if(serv["data"][0].estado == "cancelarC"){
+              this.esconderCard4 = false;
+              this.serviceMoto.getCancelaC(this.correoC).then((cancela)=>{
+                this.razon = cancela["data"][0].razonC;
+              });
+            }
           });
         }, 1000);
       }
@@ -317,7 +345,9 @@ export class MapUserPage {
 
   }
 
-
+  onModelChange(star) {
+    console.log(star)
+  }
   salir() {
     this.serviceMoto.removeEmail();
     this.navCtrl.setRoot(HomePage);
