@@ -7,6 +7,8 @@ import { UserPage } from '../user/user';
 import { DriverPage } from '../driver/driver';
 import { ServiceMotoProvider } from '../../providers/service-moto/service-moto';
 import { ActivarServicioPage } from '../activar-servicio/activar-servicio';
+import { InfoMotoPage } from '../info-moto/info-moto';
+import { VehiculoPage } from '../vehiculo/vehiculo';
 
 
 @Component({
@@ -39,7 +41,7 @@ export class HomePage {
     this.serviceMoto.getEmail().then((email)=>{
       if(email){
         console.log(email)
-        this.navCtrl.setRoot(ActivarServicioPage); 
+        this.navCtrl.setRoot(VehiculoPage);  
       }else{
         this.navCtrl.setRoot(DriverPage);
       }

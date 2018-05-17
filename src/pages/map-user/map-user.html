@@ -38,7 +38,7 @@
           </ion-card-content>
         </ion-card>
         <!--[hidden]="true"-->
-        <button [hidden]="esconderBoton" ion-button block>Registrar Contacto</button>
+        <button [hidden]="esconderBoton" (click)="registrar()" ion-button block>Registrar Contacto</button>
         <ion-card [hidden]="esconderCard2">
           <ion-item>
             <ion-avatar item-start>
@@ -53,16 +53,15 @@
             <p>Destino: {{destino}}</p>
             <p>Precio: {{precio}}</p>
             
-            <button ion-button block clear small>Cancelar Servicio</button>
+            <button ion-button block clear small (click)="cancelarServicio()">Cancelar Servicio</button>
           </ion-card-content>
         </ion-card>
 
         <ion-card [hidden]="esconderCard3">
 
           <ion-card-content>
-            <p>Origen:</p>
-            <p>Destino:</p>
-            <p>Precio: </p>
+            
+            <p>Total a Pagar: {{precio}}</p>
             <rating [(ngModel)]="rate" readOnly="false" 
               max="5"
               emptyStarIconName="star-outline"
@@ -72,7 +71,7 @@
               (ngModelChange)="onModelChange($event)">
               
             </rating>
-            <button ion-button block clear small>Terminar Calificar</button>
+            <button ion-button block clear small (click)="calificar()">Terminar Calificar</button>
           </ion-card-content>
         </ion-card>
 
@@ -81,7 +80,7 @@
           <ion-card-content>
             <p>Cancelacion</p>
             <p>Razon: {{razon}}</p>
-            <button (click)="solicitarServicio()" ion-button block clear small>Terminar Servicio</button>
+            <button (click)="eliminarPeticion()" ion-button block clear small>Terminar Servicio</button>
           </ion-card-content>
         </ion-card>
       </ion-col>

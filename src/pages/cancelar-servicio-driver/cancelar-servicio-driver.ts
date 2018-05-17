@@ -18,9 +18,13 @@ import { MapDriverPage } from '../map-driver/map-driver';
 })
 export class CancelarServicioDriverPage {
   
+  identificacionC: any;
+  correoU: any;
   correoC: any;
   constructor(public serviceMoto: ServiceMotoProvider,public navCtrl: NavController, public navParams: NavParams,public viewCtrl: ViewController) {
     this.correoC = navParams.get("correoC");
+    this.correoU = navParams.get("correoU");
+    this.identificacionC = navParams.get("identificacionC");
   }
 
   ionViewDidLoad() {
@@ -28,8 +32,10 @@ export class CancelarServicioDriverPage {
   }
 
   razon(r){
-    
-    this.serviceMoto.cancelaC(this.correoC,r).then((razon)=>{
+    this.serviceMoto.cambiarEstadoServicio(this.correoU,"cancelarC").then((cancela)=>{
+      console.log(cancela)
+    });
+    this.serviceMoto.cancelaC(this.correoU,this.correoC,r).then((razon)=>{
       console.log(razon)
       //this.viewCtrl.dismiss();
       this.navCtrl.setRoot(MapDriverPage);

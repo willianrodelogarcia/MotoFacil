@@ -35,6 +35,10 @@ import { InfoMotoPage } from '../pages/info-moto/info-moto';
 import { IonicStorageModule } from '@ionic/storage';
 import { CancelarServicioDriverPageModule } from '../pages/cancelar-servicio-driver/cancelar-servicio-driver.module';
 import { CancelarServicioDriverPage } from '../pages/cancelar-servicio-driver/cancelar-servicio-driver';
+import { ContactosPageModule } from '../pages/contactos/contactos.module';
+import { ContactosPage } from '../pages/contactos/contactos';
+import { RegistrarContactosPage } from '../pages/registrar-contactos/registrar-contactos';
+import { RegistrarContactosPageModule } from '../pages/registrar-contactos/registrar-contactos.module';
 
 
 
@@ -60,6 +64,8 @@ import { CancelarServicioDriverPage } from '../pages/cancelar-servicio-driver/ca
     ActivarServicioPageModule,
     HttpClientModule,
     InfoMotoPageModule,
+    ContactosPageModule,
+    RegistrarContactosPageModule,
     CancelarServicioDriverPageModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot()
@@ -77,6 +83,8 @@ import { CancelarServicioDriverPage } from '../pages/cancelar-servicio-driver/ca
     LoginUserPage,
     DriverPage,
     VehiculoPage,
+    ContactosPage,
+    RegistrarContactosPage,
     ActivarServicioPage,
     CancelarServicioDriverPage,
     InfoMotoPage 

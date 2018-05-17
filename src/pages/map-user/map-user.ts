@@ -5,6 +5,8 @@ import { Observable } from 'rxjs/Observable';
 import { ServiceMotoProvider } from '../../providers/service-moto/service-moto';
 import { PedirServicioPage } from '../pedir-servicio/pedir-servicio';
 import { HomePage } from '../home/home';
+import { RegistrarContactosPage } from '../registrar-contactos/registrar-contactos';
+import { ContactosPage } from '../contactos/contactos';
 
 /**
  * Generated class for the MapUserPage page.
@@ -102,17 +104,16 @@ export class MapUserPage {
   getConductores() {
 
     this.serviceMoto.getConductores().then((con) => {
-      
-      if(con["data"][0].estadoC === "1"){
-        this.conductores = con;
-        this.conductores.data.forEach(element => {
-
-          this.addMarker(element);
-
-         });
-      }
-      
-
+      if(con["data"][0] != [ ]){
+        if(con["data"][0].estadoC === "1"){
+          this.conductores = con;
+          this.conductores.data.forEach(element => {
+  
+            this.addMarker(element);
+  
+           });
+        }
+      } 
       //console.log(this.conductores);
 
     }, (err) => {
@@ -135,6 +136,10 @@ export class MapUserPage {
     });
 
     return position;
+  }
+
+  registrar(){
+    this.navCtrl.push(ContactosPage,{correoU:this.correo});
   }
 
   loadMap() {
@@ -294,49 +299,56 @@ export class MapUserPage {
       content: "Buscando..."
     });
     this.serviceMoto.pedirServicio(this.origen, this.destino, this.precio, this.correo).then((data) => {
-      console.log(data["data"][0])
-      if (data["data"][0] == "peticion_OK") {
+      console.log(data)
+      if (data["data"] === "peticion_OK") {
         this.loader.present();
         this.esconderCard = true;
         setInterval(() => {
           this.serviceMoto.getServicioU(this.correo).then((serv) => {
-            console.log(serv["data"][0].estado)
-            if (serv["data"][0].estado == "aceptar") {
-              this.servicios = serv;
-              this.esconderCard2 = false;
-              this.loader.dismiss();
-
-              this.origen = this.servicios["data"][0].origen;
-              this.destino = this.servicios["data"][0].destino;
-              this.precio = this.servicios["data"][0].precio;
-              console.log("ID " + this.servicios["data"][0].identificacionC);
-              this.serviceMoto.getConductoresId(this.servicios["data"][0].identificacionC).then((condu) => {
-                this.nombreCond = condu["data"][0].nombre;
-                this.correoC = condu["data"][0].correo;
-                this.serviceMoto.getMotos(condu["data"][0].correo).then((data) => {
-                  console.log(data["data"])
-
-                  this.imageConductor = data["data"][0].fotoConductor;
+            console.log(serv)
+            if(serv["data"].length > 0){
+              console.log(serv["data"][0].estado)
+              if (serv["data"][0].estado == "aceptar") {
+                this.servicios = serv;
+                this.esconderCard2 = false;
+                this.loader.dismiss();
+  
+                this.origen = this.servicios["data"][0].origen;
+                this.destino = this.servicios["data"][0].destino;
+                this.precio = this.servicios["data"][0].precio;
+                console.log("ID " + this.servicios["data"][0].identificacionC);
+                this.serviceMoto.getConductoresId(this.servicios["data"][0].identificacionC).then((condu) => {
+                  this.nombreCond = condu["data"][0].nombre;
+                  this.correoC = condu["data"][0].correo;
+                  this.serviceMoto.getMotos(condu["data"][0].correo).then((data) => {
+                    console.log(data["data"])
+  
+                    this.imageConductor = data["data"][0].fotoConductor;
+                  });
+  
                 });
-
-              });
-
-            } else {
-              console.log("esperando...")
-              //this.navCtrl.setRoot(MapUserPage);
+  
+              } else {
+                console.log("esperando...")
+                //this.navCtrl.setRoot(MapUserPage);
+              }
+              if (serv["data"][0].estado == "terminar") {
+                this.esconderCard2 = true;
+                this.esconderCard3 = false;
+              }
+  
+              if(serv["data"][0].estado == "cancelarC"){
+                this.esconderCard4 = false;
+                this.esconderCard2 = true;
+                this.serviceMoto.getCancelaC(this.correoC).then((cancela)=>{
+                  this.razon = cancela["data"][0].razonC;
+                });
+              }
+            }else{
+            
             }
 
-            if (serv["data"][0].estado == "terminar") {
-              this.esconderCard2 = true;
-              this.esconderCard3 = false;
-            }
-
-            if(serv["data"][0].estado == "cancelarC"){
-              this.esconderCard4 = false;
-              this.serviceMoto.getCancelaC(this.correoC).then((cancela)=>{
-                this.razon = cancela["data"][0].razonC;
-              });
-            }
+            
           });
         }, 1000);
       }
@@ -345,8 +357,23 @@ export class MapUserPage {
 
   }
 
+  eliminarPeticion(){
+    this.serviceMoto.cancelarServicio(this.correo).then((peticion)=>{
+      console.log(peticion)
+      this.navCtrl.setRoot(MapUserPage);
+    });
+    this.serviceMoto.elimiarRazonCancelacion(this.correo).then((razon)=>{
+      console.log(razon)
+    });
+  }
+  star:number;
   onModelChange(star) {
     console.log(star)
+    this.star = star;
+  }
+
+  calificar(){
+
   }
   salir() {
     this.serviceMoto.removeEmail();

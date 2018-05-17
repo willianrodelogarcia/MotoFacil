@@ -17,8 +17,8 @@
   <h2 text-center>Seleccione el Vehiculo a utilizar</h2>
   <ion-list>
     <ion-item >
-    <button text-center ion-item *ngFor="let itemMotos of motos" (click)="selectMoto(itemMotos.placaM)">
-      Moto {{ itemMotos.placa }}
+    <button text-center ion-item (click)="selectMoto()">
+      Moto {{ placa }}
       <ion-icon item-end name="md-arrow-forward"></ion-icon>
     </button>
   </ion-item>

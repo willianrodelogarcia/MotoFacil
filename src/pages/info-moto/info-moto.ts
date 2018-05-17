@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { ActivarServicioPage } from '../activar-servicio/activar-servicio';
+import { VehiculoPage } from '../vehiculo/vehiculo';
 
 /**
  * Generated class for the InfoMotoPage page.
@@ -24,6 +26,7 @@ export class InfoMotoPage {
 
   registrarMoto(){
     console.log("funciona")
+    this.navCtrl.setRoot(VehiculoPage);
   }
 
 }

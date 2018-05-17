@@ -18,16 +18,29 @@ import { InfoMotoPage } from '../info-moto/info-moto';
 })
 export class VehiculoPage {
 
-  correoC(arg0: any): any {
-    throw new Error("Method not implemented.");
-  }
+  
+  placa: any;
+  correoC: string;
   motos:any[];
 
   constructor(public serviceMoto: ServiceMotoProvider,public navCtrl: NavController, public navParams: NavParams) {
-    this.serviceMoto.getMotos(this.correoC).then((data)=>{
+
+    this.serviceMoto.getEmail().then((correo)=>{
+      this.correoC = correo;
+      this.getConductor(correo);
+    });
+    /*this.serviceMoto.getMotos(this.correoC).then((data)=>{
 
       this.motos = data["data"];
-    });
+      console.log(this.motos)
+      if(data["data"] === []){
+        //navCtrl.setRoot(ActivarServicioPage);
+      }else{
+
+      }
+    });*/
+    
+    
   }
 
   ionViewDidLoad() {
@@ -35,10 +48,28 @@ export class VehiculoPage {
   }
 
 
-  selectMoto(placa){
+  selectMoto(){
     //Falta la validacion para determinar si ya el conductor registro su Moto al sistemas
     //this.navCtrl.push(InfoMotoPage,{placa:placa});
-    this.navCtrl.setRoot(ActivarServicioPage,{placa:placa});
+     this.serviceMoto.getMotos(this.correoC).then((data)=>{
+
+      this.motos = data["data"];
+      console.log(this.motos)
+      if(data["data"] === []){
+        this.navCtrl.setRoot(InfoMotoPage);
+      }else{
+        this.navCtrl.setRoot(ActivarServicioPage,{placa:this.placa});
+      }
+    });
+    
+  }
+
+  getConductor(email){
+    console.log(this.correoC)
+    this.serviceMoto.getConductoresEmail(email).then((datos)=>{
+      this.placa = datos["data"][0].placa;
+      console.log(datos)
+  });
   }
 
 }

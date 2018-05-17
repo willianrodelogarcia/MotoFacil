@@ -29,6 +29,25 @@ export class ServiceMotoProvider {
     });
   }
 
+  getContactos(correoU){
+    //obtenerContactos
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/x-www-form-urlencoded'
+      })
+    };
+
+    let options = new HttpParams();
+    return new Promise((post)=>{
+      let params = "&correoU=" + correoU;
+      this.http.post("http://localhost/serviceMoto/serviceMoto.php?metodo=obtenerContactos", params, httpOptions).subscribe((data)=>{
+        post(data);
+      },(err)=>{
+        console.log(err);
+      });
+    });
+  }
+
   
   pedirServicio(origen, destino, precio, correo) {
     const httpOptions = {
@@ -85,6 +104,24 @@ export class ServiceMotoProvider {
     });
   }
 
+  elimiarRazonCancelacion(correoU){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/x-www-form-urlencoded'
+      })
+    };
+
+    let options = new HttpParams();
+    return new Promise((post)=>{
+      let params = "&correoU=" + correoU;
+      this.http.post("http://localhost/serviceMoto/serviceMoto.php?metodo=elimiarRazonCancelacion", params, httpOptions).subscribe((data)=>{
+        post(data);
+      },(err)=>{
+        console.log(err);
+      });
+    });
+  }
+
   getServicios(){
     return new Promise((resolve)=>{
       this.http.get("http://localhost/serviceMoto/serviceMoto.php?metodo=servicios").subscribe((data)=>{
@@ -130,6 +167,24 @@ export class ServiceMotoProvider {
       });
     });
   }
+
+  calificar(correo,idC,pago,star){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/x-www-form-urlencoded'
+      })
+    };
+
+    let options = new HttpParams(); 
+    return new Promise((post)=>{
+      let params = "&correoU=" + correo +"&identificacionC="+ idC +"&pago="+ pago +"&star="+ star;
+      this.http.post("http://localhost/serviceMoto/serviceMoto.php?metodo=calificar", params, httpOptions).subscribe((data)=>{
+        post(data);
+      },(err)=>{
+        console.log(err);
+      });
+    });
+  }
   getCancelaC(correo){
     const httpOptions = {
       headers: new HttpHeaders({
@@ -147,7 +202,7 @@ export class ServiceMotoProvider {
       });
     });
   }
-  cancelaC(correo,r){
+  cancelaC(correoU,correo,r){
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/x-www-form-urlencoded'
@@ -156,7 +211,7 @@ export class ServiceMotoProvider {
 
     let options = new HttpParams(); 
     return new Promise((post)=>{
-      let params = "&correoC=" + correo +"&razon="+r;
+      let params = "&correoC=" + correo +"&razon="+r+"&correoU="+correoU;
       this.http.post("http://localhost/serviceMoto/serviceMoto.php?metodo=cancelaCond", params, httpOptions).subscribe((data)=>{
         post(data);
       },(err)=>{
@@ -309,6 +364,25 @@ export class ServiceMotoProvider {
     });
   }
 
+
+  cambiarEstadoServicio(correoU,estado){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/x-www-form-urlencoded'
+      })
+    }; 
+
+    let options = new HttpParams();   
+    return new Promise((post)=>{
+      let params = "&correoU=" + correoU + "&estado=" +estado;
+      this.http.post("http://localhost/serviceMoto/serviceMoto.php?metodo=cambiarEstadoServicio", params, httpOptions).subscribe((data)=>{
+        post(data);
+      },(err)=>{ 
+        console.log(err);
+      });
+    });
+  }
+
   posicionActual(correo,lat,lng){
     const httpOptions = {
       headers: new HttpHeaders({
@@ -320,6 +394,24 @@ export class ServiceMotoProvider {
     return new Promise((post)=>{
       let params = "&correo=" + correo + "&lat="+ lat + "&lng="+ lng;
       this.http.post("http://localhost/serviceMoto/serviceMoto.php?metodo=posicionActual", params, httpOptions).subscribe((data)=>{
+        post(data);
+      },(err)=>{
+        console.log(err);
+      });
+    });
+  }
+
+  registroContacto(correoU,nombre,correo,celular,notificar){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/x-www-form-urlencoded'
+      })
+    };
+
+    let options = new HttpParams(); 
+    return new Promise((post)=>{
+      let params = "&correoU="+ correoU + "&nombre="+ nombre +"&correo=" + correo + "&celular="+ celular + "&notificar="+ notificar;
+      this.http.post("http://localhost/serviceMoto/serviceMoto.php?metodo=registrarConctacto", params, httpOptions).subscribe((data)=>{
         post(data);
       },(err)=>{
         console.log(err);
@@ -341,4 +433,9 @@ export class ServiceMotoProvider {
     });
   }
 
+  setInfoMoto(estado){
+    this.storage.set('infoMoto',estado);
+  }
+
+  
 }

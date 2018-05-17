@@ -214,10 +214,11 @@ export class MapDriverPage {
   getServicios() {
     setInterval(() => {
       this.serviceMoto.getServicios().then((serv) => {
-        console.log(serv["data"][0].estado)
+        console.log(serv["data"])
+        if(serv["data"].length > 0){
         if (serv["data"][0].estado == "pedir") {
           this.esconderCard = false;
-          this.esconderBotton2 = true;
+          this.esconderBotton2 = true; 
           this.esconderCard1 = true;
           /*this.servicios = serv;
           
@@ -247,6 +248,9 @@ export class MapDriverPage {
             this.razon = cancela["data"][0].razonU;
           });
         }
+      }else{
+        console.log("vacio")
+      }
       });
     }, 1000);
   }
@@ -272,7 +276,7 @@ export class MapDriverPage {
       console.log(peticion)
     });*/
 
-    this.navCtrl.push(CancelarServicioDriverPage,{correoU:this.correoC});
+    this.navCtrl.push(CancelarServicioDriverPage,{correoC:this.correoC,correoU:this.correoU,identificacionC:this.identificacionC});
   }
 
   obtenerDireccionOrigenLatLng(address: any) {
