@@ -39,6 +39,16 @@ import { ContactosPageModule } from '../pages/contactos/contactos.module';
 import { ContactosPage } from '../pages/contactos/contactos';
 import { RegistrarContactosPage } from '../pages/registrar-contactos/registrar-contactos';
 import { RegistrarContactosPageModule } from '../pages/registrar-contactos/registrar-contactos.module';
+import { CancelarServicioUserPageModule } from '../pages/cancelar-servicio-user/cancelar-servicio-user.module';
+import { CancelarServicioUserPage } from '../pages/cancelar-servicio-user/cancelar-servicio-user';
+
+
+import { File } from '@ionic-native/file';
+import { Transfer } from '@ionic-native/transfer';
+import { FilePath } from '@ionic-native/file-path';
+import { Camera } from '@ionic-native/camera';
+import { InicioUserPageModule } from '../pages/inicio-user/inicio-user.module';
+import { InicioUserPage } from '../pages/inicio-user/inicio-user';
 
 
 
@@ -66,7 +76,9 @@ import { RegistrarContactosPageModule } from '../pages/registrar-contactos/regis
     InfoMotoPageModule,
     ContactosPageModule,
     RegistrarContactosPageModule,
+    CancelarServicioUserPageModule,
     CancelarServicioDriverPageModule,
+    InicioUserPageModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot()
   ],
@@ -87,6 +99,8 @@ import { RegistrarContactosPageModule } from '../pages/registrar-contactos/regis
     RegistrarContactosPage,
     ActivarServicioPage,
     CancelarServicioDriverPage,
+    CancelarServicioUserPage,
+    InicioUserPage,
     InfoMotoPage 
   ],
   providers: [
@@ -94,6 +108,10 @@ import { RegistrarContactosPageModule } from '../pages/registrar-contactos/regis
     Geolocation,
     SplashScreen,
     Storage,
+    File,
+    Transfer,
+    Camera,
+    FilePath,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     
     ServiceMotoProvider

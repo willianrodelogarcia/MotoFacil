@@ -12,6 +12,7 @@ import { Storage } from '@ionic/storage';
 export class ServiceMotoProvider {
  
   
+  
   constructor(private storage: Storage,public http: HttpClient) {
     console.log('Hello ServiceMotoProvider Provider');
   }
@@ -21,7 +22,7 @@ export class ServiceMotoProvider {
 
   getConductores(){
     return new Promise((resolve)=>{
-      this.http.get("http://localhost/serviceMoto/serviceMoto.php?metodo=listarConductores").subscribe((data)=>{
+      this.http.get("https://wrodelogarcia.000webhostapp.com/motofacil/serviceMoto.php?metodo=listarConductores").subscribe((data)=>{
         resolve(data);
       },(err)=>{
         console.log(err);
@@ -40,7 +41,7 @@ export class ServiceMotoProvider {
     let options = new HttpParams();
     return new Promise((post)=>{
       let params = "&correoU=" + correoU;
-      this.http.post("http://localhost/serviceMoto/serviceMoto.php?metodo=obtenerContactos", params, httpOptions).subscribe((data)=>{
+      this.http.post("https://wrodelogarcia.000webhostapp.com/motofacil/serviceMoto.php?metodo=obtenerContactos", params, httpOptions).subscribe((data)=>{
         post(data);
       },(err)=>{
         console.log(err);
@@ -59,7 +60,7 @@ export class ServiceMotoProvider {
     let options = new HttpParams();
     return new Promise((post)=>{
       let params = "&origen=" + origen + "&destino=" + destino + "&precio=" + precio + "&correoU=" + correo + "&estado=" + "pedir";
-      this.http.post("http://localhost/serviceMoto/serviceMoto.php?metodo=solicitarServicio", params, httpOptions).subscribe((data)=>{
+      this.http.post("https://wrodelogarcia.000webhostapp.com/motofacil/serviceMoto.php?metodo=solicitarServicio", params, httpOptions).subscribe((data)=>{
         post(data);
       },(err)=>{
         console.log(err);
@@ -78,7 +79,7 @@ export class ServiceMotoProvider {
     let options = new HttpParams();
     return new Promise((post)=>{
       let params = "&correoU=" + correoU + "&estado=" + estado + "&identificacionC="+ identificacionC;
-      this.http.post("http://localhost/serviceMoto/serviceMoto.php?metodo=aceptarServicio", params, httpOptions).subscribe((data)=>{
+      this.http.post("https://wrodelogarcia.000webhostapp.com/motofacil/serviceMoto.php?metodo=aceptarServicio", params, httpOptions).subscribe((data)=>{
         post(data);
       },(err)=>{
         console.log(err);
@@ -96,7 +97,7 @@ export class ServiceMotoProvider {
     let options = new HttpParams();
     return new Promise((post)=>{
       let params = "&correoU=" + correoU;
-      this.http.post("http://localhost/serviceMoto/serviceMoto.php?metodo=cancelarServicio", params, httpOptions).subscribe((data)=>{
+      this.http.post("https://wrodelogarcia.000webhostapp.com/motofacil/serviceMoto.php?metodo=cancelarServicio", params, httpOptions).subscribe((data)=>{
         post(data);
       },(err)=>{
         console.log(err);
@@ -114,7 +115,7 @@ export class ServiceMotoProvider {
     let options = new HttpParams();
     return new Promise((post)=>{
       let params = "&correoU=" + correoU;
-      this.http.post("http://localhost/serviceMoto/serviceMoto.php?metodo=elimiarRazonCancelacion", params, httpOptions).subscribe((data)=>{
+      this.http.post("https://wrodelogarcia.000webhostapp.com/motofacil/serviceMoto.php?metodo=elimiarRazonCancelacion", params, httpOptions).subscribe((data)=>{
         post(data);
       },(err)=>{
         console.log(err);
@@ -124,7 +125,7 @@ export class ServiceMotoProvider {
 
   getServicios(){
     return new Promise((resolve)=>{
-      this.http.get("http://localhost/serviceMoto/serviceMoto.php?metodo=servicios").subscribe((data)=>{
+      this.http.get("https://wrodelogarcia.000webhostapp.com/motofacil/serviceMoto.php?metodo=servicios").subscribe((data)=>{
         resolve(data);
       },(err)=>{
         console.log(err);
@@ -142,7 +143,7 @@ export class ServiceMotoProvider {
     let options = new HttpParams(); 
     return new Promise((post)=>{
       let params = "&correoU=" + correo;
-      this.http.post("http://localhost/serviceMoto/serviceMoto.php?metodo=servicioU", params, httpOptions).subscribe((data)=>{
+      this.http.post("https://wrodelogarcia.000webhostapp.com/motofacil/serviceMoto.php?metodo=servicioU", params, httpOptions).subscribe((data)=>{
         post(data);
       },(err)=>{
         console.log(err);
@@ -160,7 +161,7 @@ export class ServiceMotoProvider {
     let options = new HttpParams(); 
     return new Promise((post)=>{
       let params = "&correoU=" + correo;
-      this.http.post("http://localhost/serviceMoto/serviceMoto.php?metodo=cancelaU", params, httpOptions).subscribe((data)=>{
+      this.http.post("https://wrodelogarcia.000webhostapp.com/motofacil/serviceMoto.php?metodo=cancelaU", params, httpOptions).subscribe((data)=>{
         post(data);
       },(err)=>{
         console.log(err);
@@ -178,7 +179,7 @@ export class ServiceMotoProvider {
     let options = new HttpParams(); 
     return new Promise((post)=>{
       let params = "&correoU=" + correo +"&identificacionC="+ idC +"&pago="+ pago +"&star="+ star;
-      this.http.post("http://localhost/serviceMoto/serviceMoto.php?metodo=calificar", params, httpOptions).subscribe((data)=>{
+      this.http.post("https://wrodelogarcia.000webhostapp.com/motofacil/serviceMoto.php?metodo=calificar", params, httpOptions).subscribe((data)=>{
         post(data);
       },(err)=>{
         console.log(err);
@@ -195,7 +196,7 @@ export class ServiceMotoProvider {
     let options = new HttpParams(); 
     return new Promise((post)=>{
       let params = "&correoC=" + correo;
-      this.http.post("http://localhost/serviceMoto/serviceMoto.php?metodo=cancelaC", params, httpOptions).subscribe((data)=>{
+      this.http.post("https://wrodelogarcia.000webhostapp.com/motofacil/serviceMoto.php?metodo=cancelaC", params, httpOptions).subscribe((data)=>{
         post(data);
       },(err)=>{
         console.log(err);
@@ -212,7 +213,25 @@ export class ServiceMotoProvider {
     let options = new HttpParams(); 
     return new Promise((post)=>{
       let params = "&correoC=" + correo +"&razon="+r+"&correoU="+correoU;
-      this.http.post("http://localhost/serviceMoto/serviceMoto.php?metodo=cancelaCond", params, httpOptions).subscribe((data)=>{
+      this.http.post("https://wrodelogarcia.000webhostapp.com/motofacil/serviceMoto.php?metodo=cancelaCond", params, httpOptions).subscribe((data)=>{
+        post(data);
+      },(err)=>{
+        console.log(err);
+      });
+    });
+  }
+
+  cancelaU(correoU,correo,r){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/x-www-form-urlencoded'
+      })
+    };
+
+    let options = new HttpParams(); 
+    return new Promise((post)=>{
+      let params = "&correoC=" + correo +"&razon="+r+"&correoU="+correoU;
+      this.http.post("https://wrodelogarcia.000webhostapp.com/motofacil/serviceMoto.php?metodo=cancelaUser", params, httpOptions).subscribe((data)=>{
         post(data);
       },(err)=>{
         console.log(err);
@@ -230,14 +249,14 @@ export class ServiceMotoProvider {
     let options = new HttpParams(); 
     return new Promise((post)=>{
       let params = "&nombre=" + nombre + "&identificacion=" + identificacion + "&correo="+ correo + "&celular="+ celular + "&placa="+ placa;
-      this.http.post("http://localhost/serviceMoto/serviceMoto.php?metodo=registroDriver", params, httpOptions).subscribe((data)=>{
+      this.http.post("https://wrodelogarcia.000webhostapp.com/motofacil/serviceMoto.php?metodo=registroDriver", params, httpOptions).subscribe((data)=>{
         post(data);
       },(err)=>{
         console.log(err);
       });
     });
   }
-  registroUser(nombre,correo,celular){
+  registroUser(nombre,correo,celular,foto){
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/x-www-form-urlencoded'
@@ -246,8 +265,8 @@ export class ServiceMotoProvider {
 
     let options = new HttpParams(); 
     return new Promise((post)=>{
-      let params = "&nombre=" + nombre + "&correo="+ correo + "&celular="+ celular;
-      this.http.post("http://localhost/serviceMoto/serviceMoto.php?metodo=registroUser", params, httpOptions).subscribe((data)=>{
+      let params = "&nombre=" + nombre + "&correo="+ correo + "&celular="+ celular+ "&foto="+ foto;
+      this.http.post("https://wrodelogarcia.000webhostapp.com/motofacil/serviceMoto.php?metodo=registroUser", params, httpOptions).subscribe((data)=>{
         post(data);
       },(err)=>{
         console.log(err);
@@ -266,7 +285,7 @@ export class ServiceMotoProvider {
     let options = new HttpParams(); 
     return new Promise((post)=>{
       let params = "&correo=" + correo + "&password=" + password;
-      this.http.post("http://localhost/serviceMoto/serviceMoto.php?metodo=login", params, httpOptions).subscribe((data)=>{
+      this.http.post("https://wrodelogarcia.000webhostapp.com/motofacil/serviceMoto.php?metodo=login", params, httpOptions).subscribe((data)=>{
         post(data);
       },(err)=>{
         console.log(err);
@@ -284,7 +303,7 @@ export class ServiceMotoProvider {
     let options = new HttpParams(); 
     return new Promise((post)=>{
       let params = "&correo=" + correo + "&password=" + password;
-      this.http.post("http://localhost/serviceMoto/serviceMoto.php?metodo=loginUser", params, httpOptions).subscribe((data)=>{
+      this.http.post("https://wrodelogarcia.000webhostapp.com/motofacil/serviceMoto.php?metodo=loginUser", params, httpOptions).subscribe((data)=>{
         post(data);
       },(err)=>{
         console.log(err);
@@ -302,7 +321,7 @@ export class ServiceMotoProvider {
     let options = new HttpParams(); 
     return new Promise((post)=>{
       let params = "&correo=" + correo ;
-      this.http.post("http://localhost/serviceMoto/serviceMoto.php?metodo=motos", params, httpOptions).subscribe((data)=>{
+      this.http.post("https://wrodelogarcia.000webhostapp.com/motofacil/serviceMoto.php?metodo=motos", params, httpOptions).subscribe((data)=>{
         post(data);
       },(err)=>{
         console.log(err);
@@ -320,7 +339,24 @@ export class ServiceMotoProvider {
     let options = new HttpParams(); 
     return new Promise((post)=>{
       let params = "&correo=" + correo ;
-      this.http.post("http://localhost/serviceMoto/serviceMoto.php?metodo=conductorEmail", params, httpOptions).subscribe((data)=>{
+      this.http.post("https://wrodelogarcia.000webhostapp.com/motofacil/serviceMoto.php?metodo=conductorEmail", params, httpOptions).subscribe((data)=>{
+        post(data);
+      },(err)=>{
+        console.log(err);
+      });
+    });
+  }
+  getUsuarioEmail(correoU){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/x-www-form-urlencoded'
+      })
+    };
+
+    let options = new HttpParams(); 
+    return new Promise((post)=>{
+      let params = "&correoU=" + correoU ;
+      this.http.post("https://wrodelogarcia.000webhostapp.com/motofacil/serviceMoto.php?metodo=usuario", params, httpOptions).subscribe((data)=>{
         post(data);
       },(err)=>{
         console.log(err);
@@ -338,7 +374,7 @@ export class ServiceMotoProvider {
     let options = new HttpParams(); 
     return new Promise((post)=>{
       let params = "&identificacion=" + id ;
-      this.http.post("http://localhost/serviceMoto/serviceMoto.php?metodo=conductorId", params, httpOptions).subscribe((data)=>{
+      this.http.post("https://wrodelogarcia.000webhostapp.com/motofacil/serviceMoto.php?metodo=conductorId", params, httpOptions).subscribe((data)=>{
         post(data);
       },(err)=>{
         console.log(err);
@@ -356,7 +392,7 @@ export class ServiceMotoProvider {
     let options = new HttpParams(); 
     return new Promise((post)=>{
       let params = "&correo=" + correo + "&estadoC=" +estadoC;
-      this.http.post("http://localhost/serviceMoto/serviceMoto.php?metodo=cambiarEstadoC", params, httpOptions).subscribe((data)=>{
+      this.http.post("https://wrodelogarcia.000webhostapp.com/motofacil/serviceMoto.php?metodo=cambiarEstadoC", params, httpOptions).subscribe((data)=>{
         post(data);
       },(err)=>{
         console.log(err);
@@ -375,7 +411,7 @@ export class ServiceMotoProvider {
     let options = new HttpParams();   
     return new Promise((post)=>{
       let params = "&correoU=" + correoU + "&estado=" +estado;
-      this.http.post("http://localhost/serviceMoto/serviceMoto.php?metodo=cambiarEstadoServicio", params, httpOptions).subscribe((data)=>{
+      this.http.post("https://wrodelogarcia.000webhostapp.com/motofacil/serviceMoto.php?metodo=cambiarEstadoServicio", params, httpOptions).subscribe((data)=>{
         post(data);
       },(err)=>{ 
         console.log(err);
@@ -393,7 +429,7 @@ export class ServiceMotoProvider {
     let options = new HttpParams(); 
     return new Promise((post)=>{
       let params = "&correo=" + correo + "&lat="+ lat + "&lng="+ lng;
-      this.http.post("http://localhost/serviceMoto/serviceMoto.php?metodo=posicionActual", params, httpOptions).subscribe((data)=>{
+      this.http.post("https://wrodelogarcia.000webhostapp.com/motofacil/serviceMoto.php?metodo=posicionActual", params, httpOptions).subscribe((data)=>{
         post(data);
       },(err)=>{
         console.log(err);
@@ -411,13 +447,50 @@ export class ServiceMotoProvider {
     let options = new HttpParams(); 
     return new Promise((post)=>{
       let params = "&correoU="+ correoU + "&nombre="+ nombre +"&correo=" + correo + "&celular="+ celular + "&notificar="+ notificar;
-      this.http.post("http://localhost/serviceMoto/serviceMoto.php?metodo=registrarConctacto", params, httpOptions).subscribe((data)=>{
+      this.http.post("https://wrodelogarcia.000webhostapp.com/motofacil/serviceMoto.php?metodo=registrarConctacto", params, httpOptions).subscribe((data)=>{
         post(data);
       },(err)=>{
         console.log(err);
       });
     });
   }
+
+  getGananciasCalificaciones(id){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/x-www-form-urlencoded'
+      })
+    };
+
+    let options = new HttpParams(); 
+    return new Promise((post)=>{
+      let params = "&identificacionC=" + id ;
+      this.http.post("https://wrodelogarcia.000webhostapp.com/motofacil/serviceMoto.php?metodo=gananciasCalificaciones", params, httpOptions).subscribe((data)=>{
+        post(data);
+      },(err)=>{
+        console.log(err);
+      });
+    });
+  }
+
+  registroMoto(correoC,placaM,fotoC,fotoLIzq,fotoLDer,fotoFIzq,fotoFDer){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/x-www-form-urlencoded'
+      })
+    };
+
+    let options = new HttpParams(); 
+    return new Promise((post)=>{
+      let params = "&correoC="+ correoC + "&placaM="+ placaM +"&fotoC=" + fotoC + "&fotoLDer="+ fotoLDer + "&fotoFIzq="+ fotoFIzq+ "&fotoFDer="+ fotoFDer+ "&fotoLIzq="+ fotoLIzq;
+      this.http.post("https://wrodelogarcia.000webhostapp.com/motofacil/serviceMoto.php?metodo=registoMotos", params, httpOptions).subscribe((data)=>{
+        post(data);
+      },(err)=>{
+        console.log(err);
+      });
+    });
+  }
+
 
   setEmail(email) {
     this.storage.set('email', email);

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ServiceMotoProvider } from '../../providers/service-moto/service-moto';
+import { InicioDriverPage } from '../inicio-driver/inicio-driver';
 
 /**
  * Generated class for the RegistroDriverPage page.
@@ -36,6 +37,7 @@ export class RegistroDriverPage {
       this.serviceMoto.registroDriver(this.registroDriver.value.nombre,this.registroDriver.value.identificacion,
         this.registroDriver.value.correo,this.registroDriver.value.celular,this.registroDriver.value.placa).then((data)=>{
         console.log(data)
+        this.navCtrl.setRoot(InicioDriverPage);
       });
   }
 

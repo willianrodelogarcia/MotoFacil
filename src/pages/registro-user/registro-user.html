@@ -14,7 +14,7 @@
 
 
 <ion-content padding>
-  <form [formGroup]="registroUser" (ngSubmit)="registro()">
+  <form [formGroup]="registroUser" (ngSubmit)="uploadImage()">
     <ion-item>
       <ion-label floating>Nombre Completo</ion-label>
       <ion-input formControlName="nombre" type="text"></ion-input>
@@ -33,11 +33,11 @@
           <button type="button" (click)="tomarFoto()" ion-button>Tomar Foto</button>
         </ion-col>
         <ion-col>
-          <img src="https://png.icons8.com/color/1600/person-male.png" />
+          <img src="{{pathForImage(lastImageCon)}}" [hidden]="lastImageCon === null" />
         </ion-col>
       </ion-row>
     </ion-grid>
 
-    <button ion-button block type="submit" [disabled]="!registroUser.valid">Registrar</button>
+    <button ion-button block type="submit" [disabled]="!registroUser.valid && lastImageCon === null">Registrar</button>
   </form>
 </ion-content>

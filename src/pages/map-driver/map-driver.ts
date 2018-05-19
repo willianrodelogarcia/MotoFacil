@@ -17,8 +17,13 @@ declare var google;
   templateUrl: 'map-driver.html',
 })
 export class MapDriverPage {
+  celularU: any;
+  fotoU: any;
+  nombreU: any;
+  ganancia: any;
   razon: any;
   esconderCard1: boolean = true;
+  esconderCardUser: boolean = true;
   esconderBotton1: boolean = true;
   esconderBotton2: boolean = false;
   esconderBotton3: boolean = true;
@@ -33,13 +38,14 @@ export class MapDriverPage {
   directionsService = new google.maps.DirectionsService;
   directionsDisplay = new google.maps.DirectionsRenderer;
   esconderCard = true;
-
+  esconderCard2 = true;
   origen:string;
   destino:string;
   precio:string;
   correoU:string;
   correoC:string;
   estadoC:boolean;
+  rate:any;
   identificacionC:string;
   constructor(public serviceMoto: ServiceMotoProvider,private geolocation: Geolocation, public navCtrl: NavController, public navParams: NavParams) {
     setInterval(()=>{
@@ -256,7 +262,18 @@ export class MapDriverPage {
   }
 
   contacto(){
+    this.esconderCardUser = false;
+    this.esconderBotton1 = true;
+    this.serviceMoto.getUsuarioEmail(this.correoU).then((usuario)=>{
+      this.nombreU = usuario["data"][0].nombre;
+      this.fotoU = usuario["data"][0].foto;
+      this.celularU = usuario["data"][0].celular;
+    });
+  }
 
+  cerrarCon(){
+    this.esconderCardUser = true;
+    this.esconderBotton1 = false;
   }
 
   aceptarServicio(){
@@ -269,6 +286,16 @@ export class MapDriverPage {
       this.calculateAndDisplayRoute();
       this.esconderBotton1 = false;
      });
+  }
+
+  eliminarPeticion(){
+    this.serviceMoto.cancelarServicio(this.correoU).then((peticion)=>{
+      console.log(peticion)
+      this.navCtrl.setRoot(MapDriverPage);
+    });
+    this.serviceMoto.elimiarRazonCancelacion(this.correoU).then((razon)=>{
+      console.log(razon)
+    });
   }
 
   cancelarServicio(){
@@ -305,11 +332,24 @@ export class MapDriverPage {
   }
 
   ganancias(){
-      
+      this.esconderBotton2 = true;
+      this.esconderCard2 = false;
+      console.log(this.identificacionC);
+      this.serviceMoto.getGananciasCalificaciones(this.identificacionC).then((gc)=>{
+        console.log(gc)
+        this.rate = gc["data"][0].PROMEDIO;
+        this.ganancia = gc["data"][0].TOTALCOBRADO;
+      });
+
+  }
+
+  cerrar(){
+    this.esconderBotton2 = false;
+    this.esconderCard2 = true;
   }
 
   calificacion(){
-
+    
   }
 
   iniciarViaje(){

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { DriverPage } from '../driver/driver';
+import { UserPage } from '../user/user';
 
 /**
- * Generated class for the InicioDriverPage page.
+ * Generated class for the InicioUserPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -11,20 +11,20 @@ import { DriverPage } from '../driver/driver';
 
 @IonicPage()
 @Component({
-  selector: 'page-inicio-driver',
-  templateUrl: 'inicio-driver.html',
+  selector: 'page-inicio-user',
+  templateUrl: 'inicio-user.html',
 })
-export class InicioDriverPage {
+export class InicioUserPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad InicioDriverPage');
+    console.log('ionViewDidLoad InicioUserPage');
   }
 
-
-  driver(){
-    this.navCtrl.setRoot(DriverPage);
+  user(){
+    this.navCtrl.setRoot(UserPage);
   }
+
 }

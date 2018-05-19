@@ -19,10 +19,10 @@
   <ion-grid>
     <ion-row>
       <ion-col >
-        <button ion-button>Tomar Foto</button>
+        <button ion-button (click)="tomarFoto()">Tomar Foto</button>
       </ion-col>
       <ion-col >
-        <img src="https://png.icons8.com/color/1600/person-male.png" />
+        <img src="{{pathForImage(lastImageCon)}}" [hidden]="lastImageCon === null"/>
       </ion-col>
     </ion-row>
     <ion-row>
@@ -32,12 +32,22 @@
     </ion-row>
     <ion-row>
       <ion-col text-center >
-        <img src="http://svn.openstreetmap.org/applications/share/map-icons/svg/vehicle/motorbike.svg" />
+        <img src="{{pathForImage(lastImageMotoLtIz)}}" [hidden]="lastImageMotoLtIz === null"/>
         <p>Izquierda</p>
+        <ion-col >
+          <button ion-button icon-only (click)="tomarFotoMotoLtIz()">
+            <ion-icon name="md-camera"></ion-icon>
+          </button>
+        </ion-col>
       </ion-col>
       <ion-col text-center >
-        <img src="http://svn.openstreetmap.org/applications/share/map-icons/svg/vehicle/motorbike.svg" />
+        <img src="{{pathForImage(lastImageMotoLtDr)}}" [hidden]="lastImageMotoLtDr === null"/>
         <p>Derecha</p>
+        <ion-col >
+          <button ion-button icon-only (click)="tomarFotoMotoLtDr()">
+            <ion-icon name="md-camera"></ion-icon>
+          </button>
+        </ion-col>
       </ion-col>
     </ion-row>
     <ion-row>
@@ -45,20 +55,29 @@
         <h3>Frontal y trasera del Vehiculo</h3>
       </ion-col>
     </ion-row>
-
     <ion-row>
       <ion-col text-center >
-        <img src="http://svn.openstreetmap.org/applications/share/map-icons/svg/vehicle/motorbike.svg" />
+        <img src="{{pathForImage(lastImageMotoF)}}" [hidden]="lastImageMotoF === null"/>
         <p>Frontal</p>
+        <ion-col >
+          <button ion-button icon-only (click)="tomarFotoMotoF()">
+            <ion-icon name="md-camera"></ion-icon>
+          </button>
+        </ion-col>
       </ion-col>
       <ion-col text-center >
-        <img src="http://svn.openstreetmap.org/applications/share/map-icons/svg/vehicle/motorbike.svg" />
+        <img src="{{pathForImage(lastImageMotoT)}}" [hidden]="lastImageMotoT === null" />
         <p>Trasera</p>
+        <ion-col >
+          <button ion-button icon-only (click)="tomarFotoMotoT()">
+            <ion-icon name="md-camera"></ion-icon>
+          </button>
+        </ion-col>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col  style=" text-align: center">
-        <button ion-button (click)="registrarMoto()">Actualizar Datos</button>
+        <button ion-button (click)="uploadImage()" [disabled]="(lastImageCon === null) && (lastImageMotoLtIz === null) && (lastImageMotoLtDr === null) && (lastImageMotoF === null) && (lastImageMotoT === null)">Actualizar Datos</button>
       </ion-col>
     </ion-row>
   </ion-grid>

@@ -44,10 +44,40 @@
       <ion-col>
         <button (click)="ganancias()" ion-button block small>Ganancias</button>
       </ion-col>
-      <ion-col>
-        <button (click)="calificacion()" ion-button block small>Calificacion</button>
-      </ion-col>
+      
     </ion-row>
+
+    <ion-card [hidden]="esconderCardUser">
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="https://wrodelogarcia.000webhostapp.com/motofacil/fotosUser/{{fotoU}}">
+        </ion-avatar>
+        <h2>Usuario: {{nombreU}}</h2>
+        
+      </ion-item>
+    
+      <ion-card-content>
+        <p>Celular: {{celularU}}</p>
+        <button ion-button block clear small (click)="cerrarCon()">Cerrar</button>
+      </ion-card-content>
+    </ion-card>
+    <ion-card [hidden]="esconderCard2">
+      <ion-card-content>
+        <p>Ganancias y Calificacion</p>
+        <p>Ganancias: {{ganancia}}</p>
+        <rating [(ngModel)]="rate" readOnly="true" 
+              max="5"
+              emptyStarIconName="star-outline"
+              halfStarIconName="star-half"
+              starIconName="star"
+              nullable="false"
+              >
+              
+            </rating>
+        
+        <button ion-button block clear small (click)="cerrar()">Cerrar</button>
+      </ion-card-content>
+    </ion-card>
     <ion-row [hidden]="esconderBotton3">
       <ion-col>
         <button (click)="iniciarViaje()" ion-button block small>Iniciar Viaje</button>
@@ -67,7 +97,7 @@
         <p>Razon de la Cancelacion</p>
         <p>Razon: {{razon}}</p>
         
-        <button ion-button block clear small>Cancelar Servicio</button>
+        <button ion-button block clear small (click)="eliminarPeticion()">Terminar Servicio</button>
       </ion-card-content>
     </ion-card>
   </div>

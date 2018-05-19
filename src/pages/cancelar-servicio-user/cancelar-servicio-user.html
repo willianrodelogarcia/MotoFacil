@@ -1,0 +1,37 @@
+<!--
+  Generated template for the CancelarServicioUserPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>cancelarServicioUser</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list radio-group (ionChange)="razon($event)">
+    <ion-list-header>
+      Razones
+    </ion-list-header>
+  
+    <ion-item>
+      <ion-label>Direccion Mala</ion-label>
+      <ion-radio value="Direccion Mala"></ion-radio>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label>...</ion-label>
+      <ion-radio value="Direccion Mala" ></ion-radio>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label>....</ion-label>
+      <ion-radio value="Direccion Mala" ></ion-radio>
+    </ion-item>
+  </ion-list>
+</ion-content>

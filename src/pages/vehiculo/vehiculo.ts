@@ -53,12 +53,14 @@ export class VehiculoPage {
     //this.navCtrl.push(InfoMotoPage,{placa:placa});
      this.serviceMoto.getMotos(this.correoC).then((data)=>{
 
-      this.motos = data["data"];
+      this.motos = data["data"][0];
       console.log(this.motos)
-      if(data["data"] === []){
-        this.navCtrl.setRoot(InfoMotoPage);
+      if(data["data"]){
+        this.navCtrl.setRoot(InfoMotoPage,{placa:this.placa});  
+        console.log("vacio")
       }else{
         this.navCtrl.setRoot(ActivarServicioPage,{placa:this.placa});
+        console.log("no vacio")
       }
     });
     

@@ -7,6 +7,7 @@ import { PedirServicioPage } from '../pedir-servicio/pedir-servicio';
 import { HomePage } from '../home/home';
 import { RegistrarContactosPage } from '../registrar-contactos/registrar-contactos';
 import { ContactosPage } from '../contactos/contactos';
+import { CancelarServicioUserPage } from '../cancelar-servicio-user/cancelar-servicio-user';
 
 /**
  * Generated class for the MapUserPage page.
@@ -23,6 +24,7 @@ declare var google;
   templateUrl: 'map-user.html',
 })
 export class MapUserPage {
+  idC: any;
   correoC: any;
   razon: any;
   nombreCond: any;
@@ -317,6 +319,7 @@ export class MapUserPage {
                 this.destino = this.servicios["data"][0].destino;
                 this.precio = this.servicios["data"][0].precio;
                 console.log("ID " + this.servicios["data"][0].identificacionC);
+                this.idC = this.servicios["data"][0].identificacionC;
                 this.serviceMoto.getConductoresId(this.servicios["data"][0].identificacionC).then((condu) => {
                   this.nombreCond = condu["data"][0].nombre;
                   this.correoC = condu["data"][0].correo;
@@ -357,6 +360,10 @@ export class MapUserPage {
 
   }
 
+  cancelarServicio(){
+    this.navCtrl.push(CancelarServicioUserPage,{correoC:this.correoC,correoU:this.correo});
+  }
+
   eliminarPeticion(){
     this.serviceMoto.cancelarServicio(this.correo).then((peticion)=>{
       console.log(peticion)
@@ -373,7 +380,13 @@ export class MapUserPage {
   }
 
   calificar(){
-
+    console.log("CALIFICAR")
+    this.serviceMoto.calificar(this.correo,this.idC,this.precio,this.star).then((peticion)=>{
+      console.log(peticion)
+      this.serviceMoto.cancelarServicio(this.correo).then(()=>{
+        this.navCtrl.setRoot(MapUserPage);
+      });
+    });
   }
   salir() {
     this.serviceMoto.removeEmail();
