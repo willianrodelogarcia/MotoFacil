@@ -22,7 +22,7 @@ export class RegistroDriverPage {
     this.registroDriver = this.formBuilder.group({
       nombre: ['', Validators.required],
       identificacion: ['', Validators.required],
-      correo: ['', Validators.required],
+      correo: ['', [Validators.required, Validators.email]],
       celular: ['', Validators.required],
       placa: ['', Validators.required],
     });

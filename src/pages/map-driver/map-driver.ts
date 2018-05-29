@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 import { ServiceMotoProvider } from '../../providers/service-moto/service-moto';
 import { CancelarServicioDriverPage } from '../cancelar-servicio-driver/cancelar-servicio-driver';
+import { HomePage } from '../home/home';
 
 /**
  * Generated class for the MapDriverPage page.
@@ -370,5 +371,10 @@ export class MapDriverPage {
       this.esconderBotton3 = true;
       this.esconderBotton4 = true;  
      });
+  }
+
+  salir() {
+    this.serviceMoto.removeEmail();
+    this.navCtrl.setRoot(HomePage);
   }
 }

@@ -5,7 +5,11 @@
   Ionic pages and navigation.
 -->
 <ion-content>
-
+  <div class="outLog">
+    <button ion-button icon-only outline (click)="salir()">
+      <ion-icon name="md-power"></ion-icon>
+    </button>
+  </div>
   <ion-item>
 
     <ion-toggle [(ngModel)]="estadoC" (ionChange)="disponibilidad($event)"></ion-toggle>

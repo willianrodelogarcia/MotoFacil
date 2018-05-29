@@ -55,7 +55,7 @@ export class VehiculoPage {
 
       this.motos = data["data"][0];
       console.log(this.motos)
-      if(data["data"]){
+      if(data["data"] === []){
         this.navCtrl.setRoot(InfoMotoPage,{placa:this.placa});  
         console.log("vacio")
       }else{

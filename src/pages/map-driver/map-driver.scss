@@ -58,4 +58,13 @@ page-map-driver {
           }
         }
       }
+
+      .outLog{
+        position: absolute;
+        opacity: .7; 
+        z-index: 3;
+        
+        margin-top: 13%;
+        margin-left: 85%
+     }
 }

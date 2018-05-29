@@ -31,7 +31,7 @@ export class RegistroUserPage {
   constructor( public navParams: NavParams,private camera: Camera, private transfer: Transfer, private file: File, private filePath: FilePath, public actionSheetCtrl: ActionSheetController, public toastCtrl: ToastController, public platform: Platform, public loadingCtrl: LoadingController,public serviceMoto: ServiceMotoProvider,private formBuilder: FormBuilder,public navCtrl: NavController) {
     this.registroUser = this.formBuilder.group({
       nombre: ['', Validators.required],
-      correo: ['', Validators.required],
+      correo: ['', [Validators.required, Validators.email]],
       celular: ['', Validators.required],
       
     });
