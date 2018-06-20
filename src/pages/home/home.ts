@@ -1,5 +1,5 @@
 
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MapUserPage } from '../map-user/map-user';
 import { MapDriverPage } from '../map-driver/map-driver';
@@ -14,38 +14,41 @@ import { VehiculoPage } from '../vehiculo/vehiculo';
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
-  
+
 })
 export class HomePage {
-  constructor(public serviceMoto: ServiceMotoProvider,public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public serviceMoto: ServiceMotoProvider, public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad');
   }
 
-  usuario(){
-    this.serviceMoto.getEmail().then((email)=>{
-      if(email){
+  usuario() {
+    this.serviceMoto.getEmail().then((email) => {
+      if (email) {
         console.log(email)
         this.navCtrl.setRoot(MapUserPage);
-      }else{
+      } else {
         this.navCtrl.setRoot(UserPage);
       }
     });
-    
+
   }
 
-  conductor(){
-    
-    this.serviceMoto.getEmail().then((email)=>{
-      if(email){
+  conductor() {
+
+    this.serviceMoto.getEmail().then((email) => {
+      if (email) {
         console.log(email)
-        this.navCtrl.setRoot(VehiculoPage);  
-      }else{
+        this.navCtrl.setRoot(VehiculoPage);
+      } else {
+        
         this.navCtrl.setRoot(DriverPage);
       }
     });
   }
+
+  
 
 }

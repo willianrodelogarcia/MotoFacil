@@ -21,7 +21,7 @@ export class VehiculoPage {
   
   placa: any;
   correoC: string;
-  motos:any[];
+  motos;
 
   constructor(public serviceMoto: ServiceMotoProvider,public navCtrl: NavController, public navParams: NavParams) {
 
@@ -53,9 +53,10 @@ export class VehiculoPage {
     //this.navCtrl.push(InfoMotoPage,{placa:placa});
      this.serviceMoto.getMotos(this.correoC).then((data)=>{
 
-      this.motos = data["data"][0];
+      this.motos = data["data"];
       console.log(this.motos)
-      if(data["data"] === []){
+      
+      if(data["data"].length === 0){
         this.navCtrl.setRoot(InfoMotoPage,{placa:this.placa});  
         console.log("vacio")
       }else{
@@ -70,7 +71,7 @@ export class VehiculoPage {
     console.log(this.correoC)
     this.serviceMoto.getConductoresEmail(email).then((datos)=>{
       this.placa = datos["data"][0].placa;
-      console.log(datos)
+      //console.log(datos)
   });
   }
 

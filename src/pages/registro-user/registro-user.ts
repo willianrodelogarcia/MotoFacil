@@ -140,7 +140,9 @@ export class RegistroUserPage {
 
   public uploadImage() {
     // Destination URL
-    var url = "https://wrodelogarcia.000webhostapp.com/motofacil/subirFotosUser.php";
+    //https://snuff-apportionment.000webhostapp.com/motofacil/
+    //https://wrodelogarcia.000webhostapp.com/motofacil/
+    var url = "http://motofacil.webcindario.com/motofacil/subirFotosUser.php";
    
     // File for Upload
     var targetPathCon = this.pathForImage(this.lastImageCon);
@@ -177,9 +179,16 @@ export class RegistroUserPage {
     
     this.serviceMoto.registroUser(this.registroUser.value.nombre,this.registroUser.value.correo,this.registroUser.value.celular,filenameCon).then((data)=>{
       console.log(data)
+      this.notificationSendTag();
       this.navCtrl.setRoot(InicioUserPage);
     });
 
+  }
+
+  notificationSendTag(){
+    window["plugins"].OneSignal.sendTags({
+      userRoll: "usuario"
+    });
   }
 
 }

@@ -33,14 +33,18 @@ export class RegistroDriverPage {
   }
 
   registro(){
-    
       this.serviceMoto.registroDriver(this.registroDriver.value.nombre,this.registroDriver.value.identificacion,
         this.registroDriver.value.correo,this.registroDriver.value.celular,this.registroDriver.value.placa).then((data)=>{
         console.log(data)
+        this.notificationSendTag();
         this.navCtrl.setRoot(InicioDriverPage);
       });
   }
 
-  
+  notificationSendTag(){
+    window["plugins"].OneSignal.sendTags({
+      userRoll: "conductor"
+    });
+  }
 
 }

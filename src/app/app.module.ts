@@ -49,8 +49,10 @@ import { FilePath } from '@ionic-native/file-path';
 import { Camera } from '@ionic-native/camera';
 import { InicioUserPageModule } from '../pages/inicio-user/inicio-user.module';
 import { InicioUserPage } from '../pages/inicio-user/inicio-user';
+import { InicioDriverPage } from '../pages/inicio-driver/inicio-driver';
+import { InicioDriverPageModule } from '../pages/inicio-driver/inicio-driver.module';
 
-
+import { OneSignal } from '@ionic-native/onesignal';
 
 
 
@@ -79,6 +81,7 @@ import { InicioUserPage } from '../pages/inicio-user/inicio-user';
     CancelarServicioUserPageModule,
     CancelarServicioDriverPageModule,
     InicioUserPageModule,
+    InicioDriverPageModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot()
   ],
@@ -101,6 +104,7 @@ import { InicioUserPage } from '../pages/inicio-user/inicio-user';
     CancelarServicioDriverPage,
     CancelarServicioUserPage,
     InicioUserPage,
+    InicioDriverPage,
     InfoMotoPage 
   ],
   providers: [
@@ -112,6 +116,7 @@ import { InicioUserPage } from '../pages/inicio-user/inicio-user';
     Transfer,
     Camera,
     FilePath,
+    OneSignal,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     
     ServiceMotoProvider

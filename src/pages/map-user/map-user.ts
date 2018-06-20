@@ -305,6 +305,13 @@ export class MapUserPage {
       if (data["data"] === "peticion_OK") {
         this.loader.present();
         this.esconderCard = true;
+        //this.sendNotificationConductor();
+        this.serviceMoto.sendNotification().then((data)=>{
+          
+        },(failedResponse)=>{
+          console.log("Notification Post Failed: ", failedResponse);
+          alert("Notification Post Failed:\n" + JSON.stringify(failedResponse));
+        });
         setInterval(() => {
           this.serviceMoto.getServicioU(this.correo).then((serv) => {
             console.log(serv)
@@ -391,6 +398,37 @@ export class MapUserPage {
   salir() {
     this.serviceMoto.removeEmail();
     this.navCtrl.setRoot(HomePage);
+  }
+
+
+
+  sendNotificationConductor() {
+    window["plugins"].OneSignal.getIds(function (ids) {
+
+      var notificationObj = {
+        app_id: "5f4cf235-8b4c-430b-9575-0cd1ddd6d11d",
+        //Authorization: "Basic MThjMzg3MzYtZjVmYi00ZWI3LWJlZGEtMzNkMGUzMjQxNDVi",
+        contents: { en: "Un Usuario esta pidiendo un Servicio" },
+        include_player_ids: [ids.userId],
+        included_segments: ["All"],
+        
+        filters: [
+          {"field": "tag", "key": "userRoll", "relation": "=", "value": "conductor"}
+        ]
+      };
+      
+      
+
+      window["plugins"].OneSignal.postNotification(notificationObj,
+        function (successResponse) {
+          console.log("Notification Post Success:", successResponse);
+        },
+        function (failedResponse) {
+          console.log("Notification Post Failed: ", failedResponse);
+          alert("Notification Post Failed:\n" + JSON.stringify(failedResponse));
+        }
+      );
+    });
   }
 
 }

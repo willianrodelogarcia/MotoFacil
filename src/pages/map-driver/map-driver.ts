@@ -286,6 +286,7 @@ export class MapDriverPage {
       console.log(peticion["data"])
       this.calculateAndDisplayRoute();
       this.esconderBotton1 = false;
+      this.esconderCard = true;
      });
   }
 
